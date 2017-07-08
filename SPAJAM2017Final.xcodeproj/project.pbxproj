@@ -82,6 +82,8 @@
 		24DA30E41D441E3E00E4C9C4 /* NSError+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DA30E31D441E3E00E4C9C4 /* NSError+.swift */; };
 		24DDCC6F1D36870700CC8046 /* Dictionary+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DDCC6E1D36870700CC8046 /* Dictionary+.swift */; };
 		24FD0C4A1D5F34DF0031B6F0 /* ProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24FD0C491D5F34DF0031B6F0 /* ProgressHUD.swift */; };
+		9B16BD231F11447F0009EE46 /* BraveInfectionVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B16BD221F11447F0009EE46 /* BraveInfectionVC.storyboard */; };
+		9B16BD251F1144A60009EE46 /* BraveInfectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B16BD241F1144A60009EE46 /* BraveInfectionVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -196,6 +198,8 @@
 		24DA30E31D441E3E00E4C9C4 /* NSError+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSError+.swift"; sourceTree = "<group>"; };
 		24DDCC6E1D36870700CC8046 /* Dictionary+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+.swift"; sourceTree = "<group>"; };
 		24FD0C491D5F34DF0031B6F0 /* ProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressHUD.swift; sourceTree = "<group>"; };
+		9B16BD221F11447F0009EE46 /* BraveInfectionVC.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = BraveInfectionVC.storyboard; path = Common/BraveInfectionVC.storyboard; sourceTree = "<group>"; };
+		9B16BD241F1144A60009EE46 /* BraveInfectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BraveInfectionVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -405,6 +409,8 @@
 			children = (
 				243F948E1D25873C00C302D0 /* Common */,
 				24410D6E1D2427AA008B0A97 /* Main.storyboard */,
+				9B16BD241F1144A60009EE46 /* BraveInfectionVC.swift */,
+				9B16BD221F11447F0009EE46 /* BraveInfectionVC.storyboard */,
 				24410D6C1D2427A9008B0A97 /* TopVC.swift */,
 				24671AEA1F113D9100EAF842 /* LoginVC.swift */,
 			);
@@ -586,6 +592,7 @@
 				249269561EDC5E2C00C24E40 /* SimpleListVC.storyboard in Resources */,
 				24410D721D2427AA008B0A97 /* Assets.xcassets in Resources */,
 				24410D701D2427AA008B0A97 /* Main.storyboard in Resources */,
+				9B16BD231F11447F0009EE46 /* BraveInfectionVC.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -651,6 +658,7 @@
 				247A9C7E1ED9B5E900D929FF /* Operator.swift in Sources */,
 				244274E41D3FD4BB00088A78 /* Realm+.swift in Sources */,
 				24DDCC6F1D36870700CC8046 /* Dictionary+.swift in Sources */,
+				9B16BD251F1144A60009EE46 /* BraveInfectionVC.swift in Sources */,
 				24410D991D24FD01008B0A97 /* URL+.swift in Sources */,
 				24DA30E41D441E3E00E4C9C4 /* NSError+.swift in Sources */,
 				243F94901D25874800C302D0 /* IBDesignable.swift in Sources */,
