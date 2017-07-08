@@ -23,6 +23,7 @@ import InstantiateStandard
 final class BraveInfectionVC: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var userIconView: UserIconView!
     
     static var instantiateSource: InstantiateSource {
         return .identifier(className)
@@ -40,7 +41,6 @@ final class BraveInfectionVC: UIViewController {
         
         let doubleTapGesture = UITapGestureRecognizer(target: self, action:#selector(self.doubleTap))
         doubleTapGesture.numberOfTapsRequired = 2
-        contentView.isUserInteractionEnabled = true
         contentView.addGestureRecognizer(doubleTapGesture)
     }
 
