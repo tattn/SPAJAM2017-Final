@@ -118,7 +118,7 @@ final class BraveInfectionVC: UIViewController {
                                                      animated: true)
                 case .right:
                     self.scrollView.setContentOffset(CGPoint(x: center.x - screenSize.width * 3 / 2 + screenSize.width - 100,
-                                                             y: center.y - screenSize.height / 2 - 50), // なんかズレる(´・ω・｀)
+                                                             y: center.y - screenSize.height / 2),
                                                      animated: true)
                 case .down:
                     self.scrollView.setContentOffset(CGPoint(x: center.x - screenSize.width * 3 / 2,
@@ -126,7 +126,7 @@ final class BraveInfectionVC: UIViewController {
                                                      animated: true)
                 case .left:
                     self.scrollView.setContentOffset(CGPoint(x: center.x - screenSize.width * 3 / 2 - screenSize.width + 100,
-                                                             y: center.y - screenSize.height / 2 - 50), // なんかズレる(´・ω・｀)
+                                                             y: center.y - screenSize.height / 2),
                                                      animated: true)
                 case .none:
                     print("fuck you")
@@ -149,8 +149,9 @@ final class BraveInfectionVC: UIViewController {
         // scrollView.showsHorizontalScrollIndicator = true
         // scrollView.showsVerticalScrollIndicator = true
         
+        let 謎のズレ: CGFloat = 57.0
         scrollView.setContentOffset(CGPoint(x: point.x - screenSize.width * 3 / 2,
-                                            y: point.y - screenSize.height / 2),
+                                            y: point.y - screenSize.height / 2 + 謎のズレ),
                                     animated: false)
     }
     
