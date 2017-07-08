@@ -44,9 +44,16 @@ final class TopVC: UIViewController, StoryboardInstantiatable {
         })
         .disposed(by: disposeBag)
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
 
     @IBAction func tapLoginButton(_ sender: Any) {
-        let loginVC = LoginVC()
-        present(loginVC, animated: true, completion: nil)
+        Login.login(from: self) {
+            GraphAPI.me(from: self) { _ in
+                
+            }
+        }
     }
 }
