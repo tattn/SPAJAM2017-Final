@@ -62,6 +62,8 @@
 		24671AE61F11342600EAF842 /* RxHelper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2441B2A61EE066CF0065A0A6 /* RxHelper.framework */; };
 		24671AE71F11342600EAF842 /* RxHelper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2441B2A61EE066CF0065A0A6 /* RxHelper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		24671AEB1F113D9100EAF842 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24671AEA1F113D9100EAF842 /* LoginVC.swift */; };
+		24671AEE1F11487900EAF842 /* GraphAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24671AED1F11487900EAF842 /* GraphAPI.swift */; };
+		24671AF01F114A4C00EAF842 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24671AEF1F114A4C00EAF842 /* Login.swift */; };
 		247A9C7E1ED9B5E900D929FF /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247A9C7D1ED9B5E900D929FF /* Operator.swift */; };
 		247A9C801ED9BF3C00D929FF /* NotificationKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247A9C7F1ED9BF3C00D929FF /* NotificationKey.swift */; };
 		247A9CD21EDA051200D929FF /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247A9CD11EDA051200D929FF /* Errors.swift */; };
@@ -174,6 +176,8 @@
 		24671A951F1130E600EAF842 /* FBSDKPlacesKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKPlacesKit.framework; sourceTree = "<group>"; };
 		24671A961F1130E600EAF842 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		24671AEA1F113D9100EAF842 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		24671AED1F11487900EAF842 /* GraphAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphAPI.swift; sourceTree = "<group>"; };
+		24671AEF1F114A4C00EAF842 /* Login.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		247A9C7D1ED9B5E900D929FF /* Operator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
 		247A9C7F1ED9BF3C00D929FF /* NotificationKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationKey.swift; sourceTree = "<group>"; };
 		247A9CD11EDA051200D929FF /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
@@ -349,6 +353,15 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		24671AEC1F11486300EAF842 /* Facebook */ = {
+			isa = PBXGroup;
+			children = (
+				24671AED1F11487900EAF842 /* GraphAPI.swift */,
+				24671AEF1F114A4C00EAF842 /* Login.swift */,
+			);
+			name = Facebook;
+			sourceTree = "<group>";
+		};
 		247A9C7C1ED9B5B200D929FF /* Operator */ = {
 			isa = PBXGroup;
 			children = (
@@ -422,6 +435,7 @@
 		247A9D2F1EDAD0DA00D929FF /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				24671AEC1F11486300EAF842 /* Facebook */,
 				247A9D311EDB12CB00D929FF /* HTTPClient */,
 				2419F2881D441703005917D2 /* FooModel.swift */,
 			);
@@ -650,6 +664,7 @@
 				24410D801D242A71008B0A97 /* NSObject+.swift in Sources */,
 				24FD0C4A1D5F34DF0031B6F0 /* ProgressHUD.swift in Sources */,
 				24C450041ED75D1B009B6B8C /* UserDefaultsKey.swift in Sources */,
+				24671AF01F114A4C00EAF842 /* Login.swift in Sources */,
 				24410D6B1D2427A9008B0A97 /* AppDelegate.swift in Sources */,
 				243F948B1D25852500C302D0 /* CoreFunctionExtension.swift in Sources */,
 				24410D921D242ED2008B0A97 /* EnumEnumerable.swift in Sources */,
@@ -667,6 +682,7 @@
 				247A9CD21EDA051200D929FF /* Errors.swift in Sources */,
 				247A9D331EDB12F900D929FF /* HTTPRequest.swift in Sources */,
 				242CA74E1D5DA5B400BD0C4E /* NSLocalizedString+.swift in Sources */,
+				24671AEE1F11487900EAF842 /* GraphAPI.swift in Sources */,
 				2441B2C41EE080DC0065A0A6 /* Retry.swift in Sources */,
 				24410D861D242BEE008B0A97 /* UIColor+.swift in Sources */,
 			);
