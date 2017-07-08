@@ -25,7 +25,7 @@
                                         <rect key="frame" x="-375" y="0.0" width="1125" height="2001"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="bgimage_gradation" id="v3V-dd-fEV">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="bgimage_gradation" id="v3V-dd-fEV">
                                                 <rect key="frame" x="0.0" y="0.0" width="1125" height="1334"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
