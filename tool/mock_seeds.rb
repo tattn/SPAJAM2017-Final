@@ -6,7 +6,7 @@ def mock
 F(gender: "#{["男性", "女性"].sample}",
   locationName: "#{location.call}",
   works: [
-      W(employerName: "#{["コロプラ, ヤフー株式会社"].sample}", startDate: "0000-00", id: "?????????", locationName: "東京都 ?区", positionName: "エンジニア")
+      W(employerName: "#{["株式会社コロプラ", "ヤフー株式会社"].sample}", startDate: "0000-00", id: "?????????", locationName: "東京都 ?区", positionName: "エンジニア")
   ],
   id: "??????????",
   birthday: "#{Random.rand(Date.parse("1970/01/01") .. Date.parse("2000/01/01")).strftime('%m/%d/%Y')}",
