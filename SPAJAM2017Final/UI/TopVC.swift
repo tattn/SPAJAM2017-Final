@@ -51,8 +51,11 @@ final class TopVC: UIViewController, StoryboardInstantiatable {
 
     @IBAction func tapLoginButton(_ sender: Any) {
         Login.login(from: self) {
-            GraphAPI.me(from: self) { _ in
-                
+            GraphAPI.me { _ in
+                GraphAPI.friends { _ in
+                    GraphAPI.profile(userId: "747789068725242") { _ in
+                    }
+                }
             }
         }
     }
