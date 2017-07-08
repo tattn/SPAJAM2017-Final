@@ -34,6 +34,11 @@ struct TaggableFriend {
     let name: String
 }
 
+struct Feed {
+    let message: String?
+    let id: String?
+}
+
 final class GraphAPI {
     static func me(completion: @escaping (Result<GraphMe, NSError>) -> Void) {
         guard FBSDKAccessToken.current() != nil else { return }
@@ -156,4 +161,24 @@ final class GraphAPI {
         })
     }
 
+    static func feed(userId: String, completion: @escaping (Result<[Feed], NSError>) -> Void) {
+        guard FBSDKAccessToken.current() != nil else { return }
+        
+        let params: [String: String] = ["fields": "message", "locale": "ja_JP", "limit": "\(100)"]
+        let request = FBSDKGraphRequest(graphPath: "/\(userId)/feed", parameters: params)
+        _ = request?.start(completionHandler: { (_, result, error) -> Void in
+            
+            if let error = error {
+                print("graph friends: \(error)")
+                return
+            }
+            
+            guard let result = result as? [String: Any] else { return }
+            
+            let feeds = (result["data"] as! [[String: Any]]).map { Feed(message: $0["message"] as? String, id: $0["id"] as? String) }
+            
+            print(feeds)
+            completion(.success(feeds))
+        })
+    }
 }
