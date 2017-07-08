@@ -10,10 +10,31 @@ import UIKit
 import Instantiate
 import InstantiateStandard
 
+@IBDesignable class RotateView: UIView {
+    
+    @IBInspectable var rotation: CGFloat = 0.0 {
+        didSet {
+            self.transform = CGAffineTransform(rotationAngle: CGFloat(rotation))
+        }
+    }
+    
+    override func draw(_ rect: CGRect) {
+        // ...
+    }
+}
+
 @IBDesignable final public class RoundedView: UIView {
     
     override public func layoutSubviews() {
         super.layoutSubviews()
+        
+        let shadowPath = UIBezierPath(rect: bounds)
+        layer.masksToBounds = false
+        layer.shadowColor = UIColor.darkGray.cgColor
+        layer.shadowOffset = CGSize(width: 0.1, height: 0.1)
+        layer.shadowOpacity = 0.2
+        layer.shadowPath = shadowPath.cgPath
+        layer.shadowRadius = 0.5 * bounds.size.width
         
         //hard-coded this since it's always round
         layer.cornerRadius = 0.5 * bounds.size.width
@@ -23,6 +44,7 @@ import InstantiateStandard
 final class BraveInfectionVC: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var userIconView: UserIconView!
     
     static var instantiateSource: InstantiateSource {
         return .identifier(className)
@@ -40,7 +62,6 @@ final class BraveInfectionVC: UIViewController {
         
         let doubleTapGesture = UITapGestureRecognizer(target: self, action:#selector(self.doubleTap))
         doubleTapGesture.numberOfTapsRequired = 2
-        contentView.isUserInteractionEnabled = true
         contentView.addGestureRecognizer(doubleTapGesture)
     }
 
