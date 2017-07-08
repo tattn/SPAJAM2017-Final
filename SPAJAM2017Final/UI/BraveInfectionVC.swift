@@ -164,12 +164,11 @@ final class BraveInfectionVC: UIViewController {
         func setup(view: UIView, direction: Direction = .none) {
             func setupResultButtons(center: CGPoint, direction: Direction = .none) {
                 let buttonSize = CGSize(width: 100.0, height: 100.0)
-                let button = UIButton(frame: CGRect(origin: CGPoint(x: center.x - buttonSize.width / 2 + direction.diffFromCenterForResults().x,
-                                                                    y: center.y - buttonSize.height / 2 + direction.diffFromCenterForResults().y),
-                                                    size: buttonSize))
-                button.setTitle("ああああああ", for: [])
-                button.backgroundColor = .red
-                self.contentView.addSubview(button)
+                let defaultPoint = CGPoint(x: center.x - buttonSize.width / 2 + direction.diffFromCenterForResults().x,
+                                           y: center.y - buttonSize.height / 2 + direction.diffFromCenterForResults().y)
+                let view = UIView(frame: CGRect(origin: defaultPoint, size: buttonSize))
+                view.backgroundColor = .red
+                self.contentView.addSubview(view)
             }
 
             view.frame = CGRect(origin: CGPoint(x: point.x - view.frame.size.width / 2 + direction.diffFromCenter().x,
