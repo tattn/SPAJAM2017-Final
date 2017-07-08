@@ -10,6 +10,16 @@ import UIKit
 import Instantiate
 import InstantiateStandard
 
+@IBDesignable final public class RoundedView: UIView {
+    
+    override public func layoutSubviews() {
+        super.layoutSubviews()
+        
+        //hard-coded this since it's always round
+        layer.cornerRadius = 0.5 * bounds.size.width
+    }
+}
+
 final class BraveInfectionVC: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!

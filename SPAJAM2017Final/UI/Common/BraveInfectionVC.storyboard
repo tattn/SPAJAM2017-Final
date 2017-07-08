@@ -17,38 +17,58 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="WLk-P1-BBZ">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" id="WLk-P1-BBZ">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" id="VN6-3Y-YmX">
-                                        <rect key="frame" x="0.0" y="0.0" width="400" height="800"/>
+                                    <view contentMode="scaleToFill" misplaced="YES" id="VN6-3Y-YmX">
+                                        <rect key="frame" x="-375" y="0.0" width="1125" height="1334"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" misplaced="YES" id="y4J-By-Cw3">
-                                                <rect key="frame" x="180" y="380" width="40" height="40"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="bgimage_gradation" id="v3V-dd-fEV">
+                                                <rect key="frame" x="0.0" y="0.0" width="1125" height="1334"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" red="0.96862745289999996" green="0.36470589040000001" blue="0.36862745879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </imageView>
+                                            <view contentMode="scaleToFill" misplaced="YES" id="x5E-eN-2JH">
+                                                <rect key="frame" x="488" y="313" width="154" height="142"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="user_image" id="odP-dA-6Df">
+                                                        <rect key="frame" x="27" y="21" width="100" height="100"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    </imageView>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             </view>
-                                            <view contentMode="scaleToFill" misplaced="YES" id="3xc-Rw-WcP">
-                                                <rect key="frame" x="195" y="292" width="10" height="80"/>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="9ho-I9-ARn">
+                                                <rect key="frame" x="427" y="239" width="45" height="62"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" red="0.96862745289999996" green="0.36470589040000001" blue="0.36862745879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </view>
-                                            <view contentMode="scaleToFill" misplaced="YES" id="pE1-mD-mB3">
-                                                <rect key="frame" x="195" y="428" width="10" height="80"/>
+                                                <state key="normal" image="icon_birthday"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="OHh-g6-jt7">
+                                                <rect key="frame" x="665" y="492" width="45" height="62"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" red="0.96862745289999996" green="0.36470589040000001" blue="0.36862745879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </view>
-                                            <view contentMode="scaleToFill" misplaced="YES" id="mcP-M6-A1g">
-                                                <rect key="frame" x="228" y="395" width="80" height="10"/>
+                                                <state key="normal" image="icon_green_pin"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="THm-9S-qen">
+                                                <rect key="frame" x="437" y="492" width="45" height="62"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" red="0.96862745289999996" green="0.36470589040000001" blue="0.36862745879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </view>
-                                            <view contentMode="scaleToFill" misplaced="YES" id="Y7p-Fs-CU0">
-                                                <rect key="frame" x="92" y="395" width="80" height="10"/>
+                                                <state key="normal" image="icon_green_skyblue"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="xtn-3f-NU8">
+                                                <rect key="frame" x="639" y="239" width="45" height="62"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" red="0.96862745289999996" green="0.36470589040000001" blue="0.36862745879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <state key="normal" image="icon_school"/>
+                                            </button>
+                                            <view contentMode="scaleToFill" misplaced="YES" id="q76-Zw-B56" customClass="RoundedView" customModule="SPAJAM2017Final" customModuleProvider="target">
+                                                <rect key="frame" x="470" y="562" width="50" height="50"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="19"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -68,6 +88,14 @@
             <point key="canvasLocation" x="30.5" y="41.5"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="bgimage_gradation" width="375" height="667"/>
+        <image name="icon_birthday" width="28" height="29"/>
+        <image name="icon_green_pin" width="24" height="33"/>
+        <image name="icon_green_skyblue" width="24" height="33"/>
+        <image name="icon_school" width="33" height="27"/>
+        <image name="user_image" width="249" height="250"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
