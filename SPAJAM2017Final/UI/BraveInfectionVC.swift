@@ -62,10 +62,9 @@ final class BraveInfectionVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        let doubleTapGesture = UITapGestureRecognizer(target: self, action:#selector(self.doubleTap))
-        doubleTapGesture.numberOfTapsRequired = 2
-        contentView.addGestureRecognizer(doubleTapGesture)
+        // let doubleTapGesture = UITapGestureRecognizer(target: self, action:#selector(self.doubleTap))
+        // doubleTapGesture.numberOfTapsRequired = 2
+        // contentView.addGestureRecognizer(doubleTapGesture)
 
         let screenSize = UIScreen.main.bounds.size
         let center = CGPoint(x: screenSize.width * 3 / 2, y: screenSize.height * 3 / 2)
@@ -122,7 +121,7 @@ final class BraveInfectionVC: UIViewController {
                                                      animated: true)
                 case .down:
                     self.scrollView.setContentOffset(CGPoint(x: center.x - screenSize.width * 3 / 2,
-                                                             y: center.y - screenSize.height / 2 + screenSize.height - 250),
+                                                             y: center.y - screenSize.height / 2 + screenSize.height - 275),
                                                      animated: true)
                 case .left:
                     self.scrollView.setContentOffset(CGPoint(x: center.x - screenSize.width * 3 / 2 - screenSize.width + 100,
@@ -172,6 +171,7 @@ final class BraveInfectionVC: UIViewController {
 }
 
 extension BraveInfectionVC {
+    /*
     // http://qiita.com/yonezawaizumi/items/bd3f53b2f4d80f815357
     func doubleTap(gesture: UITapGestureRecognizer) -> Void {
         if (scrollView.zoomScale < scrollView.maximumZoomScale ) {
@@ -191,7 +191,7 @@ extension BraveInfectionVC {
         zoomRect.origin.x = center.x - zoomRect.size.width / 2.0
         zoomRect.origin.y = center.y - zoomRect.size.height / 2.0
         return zoomRect
-    }
+    }*/
 }
 
 /*
