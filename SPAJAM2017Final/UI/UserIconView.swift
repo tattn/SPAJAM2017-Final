@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserIconView: UIView {
+class UserIconView: RoundedView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         

@@ -22,13 +22,33 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" misplaced="YES" id="VN6-3Y-YmX">
-                                        <rect key="frame" x="-375" y="0.0" width="1125" height="1334"/>
+                                        <rect key="frame" x="-375" y="0.0" width="1125" height="2001"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="bgimage_gradation" id="v3V-dd-fEV">
                                                 <rect key="frame" x="0.0" y="0.0" width="1125" height="1334"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
+                                            <view contentMode="scaleToFill" misplaced="YES" id="b1h-ub-EtT" customClass="RotateView" customModule="SPAJAM2017Final" customModuleProvider="target">
+                                                <rect key="frame" x="559" y="667" width="6" height="667"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.96068006750000001" green="0.96084433790000001" blue="0.96066969629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="rotation">
+                                                        <real key="value" value="0.0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <view contentMode="scaleToFill" misplaced="YES" id="HSQ-U6-7sa" customClass="RotateView" customModule="SPAJAM2017Final" customModuleProvider="target">
+                                                <rect key="frame" x="559" y="667" width="6" height="667"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.96068006750000001" green="0.96084433790000001" blue="0.96066969629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="rotation">
+                                                        <real key="value" value="1.5707960000000001"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
                                             <view contentMode="scaleToFill" misplaced="YES" id="x5E-eN-2JH" customClass="UserIconView" customModule="SPAJAM2017Final" customModuleProvider="target">
                                                 <rect key="frame" x="488" y="313" width="142" height="142"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -130,16 +150,6 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" misplaced="YES" id="b1h-ub-EtT" customClass="RotateView" customModule="SPAJAM2017Final" customModuleProvider="target">
-                                                <rect key="frame" x="488" y="111" width="4" height="200"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" red="0.96068006750000001" green="0.96084433790000001" blue="0.96066969629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="rotation">
-                                                        <real key="value" value="2.2999999999999998"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
@@ -148,9 +158,16 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="667"/>
                     <connections>
                         <outlet property="contentView" destination="VN6-3Y-YmX" id="2u7-zg-VQF"/>
                         <outlet property="scrollView" destination="WLk-P1-BBZ" id="U1S-lY-2Il"/>
+                        <outlet property="userIconView" destination="x5E-eN-2JH" id="BWV-61-VD9"/>
+                        <outlet property="同じ出身地View" destination="5Cw-Uf-daF" id="Kj7-Yn-kK6"/>
+                        <outlet property="同じ所在地View" destination="q76-Zw-B56" id="6Pa-iG-9Pc"/>
+                        <outlet property="同じ誕生日View" destination="27M-Hm-zeI" id="ued-Fm-VA5"/>
+                        <outlet property="同じ高校View" destination="1aP-Xi-ibP" id="9An-g8-AFB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
