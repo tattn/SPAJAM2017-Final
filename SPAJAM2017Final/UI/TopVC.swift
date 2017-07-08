@@ -50,11 +50,10 @@ final class TopVC: UIViewController, StoryboardInstantiatable {
     }
 
     @IBAction func tapLoginButton(_ sender: Any) {
-        // やっぱやめた
-//        let loginVC = LoginVC()
-//        present(loginVC, animated: true, completion: nil)
         Login.login(from: self) {
-            GraphAPI.me(from: self)
+            GraphAPI.me(from: self) { _ in
+                
+            }
         }
     }
 }

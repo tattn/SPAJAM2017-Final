@@ -12,13 +12,17 @@ import FBSDKLoginKit
 
 final class Login {
     static func login(from vc: UIViewController, completion: (() -> Void)? = nil) {
-        if FBSDKAccessToken.current() != nil {
-            completion?()
-            return
-        }
+//        if FBSDKAccessToken.current() != nil {
+//            completion?()
+//            return
+//        }
+        
+        let permissions: [String] = [
+            "public_profile", "user_friends", "user_birthday", "user_education_history", "user_events", "user_hometown", "user_likes", "user_location", "user_work_history"
+        ]
         
         let login = FBSDKLoginManager()
-        login.logIn(withReadPermissions: ["public_profile", "email"], from: vc) { (result, error) in
+        login.logIn(withReadPermissions: permissions, from: vc) { (result, error) in
             if let error = error {
                 print("permission error: \(error)")
                 completion?()
