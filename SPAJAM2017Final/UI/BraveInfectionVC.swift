@@ -16,6 +16,7 @@ import RxCocoa
     
     @IBInspectable var rotation: CGFloat = 0.0 {
         didSet {
+            // 90度指定するためにはcodeでCGFloat(M_PI) / 2.0と入れたほうが安全そう
             self.transform = CGAffineTransform(rotationAngle: CGFloat(rotation))
         }
     }
@@ -52,6 +53,7 @@ final class BraveInfectionVC: UIViewController {
     @IBOutlet weak var 同じ出身地View: RoundedView!
     @IBOutlet weak var 同じ所在地View: RoundedView!
     
+    private var isCenter = true
     
     static var instantiateSource: InstantiateSource {
         return .identifier(className)
@@ -88,7 +90,7 @@ final class BraveInfectionVC: UIViewController {
             case .down:
                 return CGPoint(x: 0, y: 200)
             case .left:
-                return CGPoint(x: -125, y: 0)
+                return CGPoint(x: -135, y: 0)
             case .none:
                 return .zero
             }
@@ -96,13 +98,19 @@ final class BraveInfectionVC: UIViewController {
     }
     
     private func setupRoundedViews(center: CGPoint, screenSize: CGSize) {
-        print("center", center)
-        print("screenSize", screenSize)
         func addGesture(to view: UIView, goto direction: Direction) {
             var tapGesture = UITapGestureRecognizer()
 
             view.addGestureRecognizer(tapGesture)
             tapGesture.rx.event.subscribe(onNext: { _ in
+                guard self.isCenter else {
+                    self.scrollView.setContentOffset(CGPoint(x: center.x - screenSize.width * 3 / 2,
+                                                             y: center.y - screenSize.height / 2),
+                                                     animated: true)
+                    self.isCenter = true
+                    return
+                }
+                
                 switch direction {
                 case .up:
                     self.scrollView.setContentOffset(CGPoint(x: center.x - screenSize.width * 3 / 2,
@@ -110,7 +118,7 @@ final class BraveInfectionVC: UIViewController {
                                                      animated: true)
                 case .right:
                     self.scrollView.setContentOffset(CGPoint(x: center.x - screenSize.width * 3 / 2 + screenSize.width - 100,
-                                                             y: center.y - screenSize.height / 2 - 50),
+                                                             y: center.y - screenSize.height / 2 - 50), // なんかズレる(´・ω・｀)
                                                      animated: true)
                 case .down:
                     self.scrollView.setContentOffset(CGPoint(x: center.x - screenSize.width * 3 / 2,
@@ -118,13 +126,14 @@ final class BraveInfectionVC: UIViewController {
                                                      animated: true)
                 case .left:
                     self.scrollView.setContentOffset(CGPoint(x: center.x - screenSize.width * 3 / 2 - screenSize.width + 100,
-                                                             y: center.y - screenSize.height / 2 - 50),
+                                                             y: center.y - screenSize.height / 2 - 50), // なんかズレる(´・ω・｀)
                                                      animated: true)
                 case .none:
                     print("fuck you")
                 }
+                self.isCenter = false
             })
-            .disposed(by: disposeBag)        
+            .disposed(by: disposeBag)
         }
         
         addGesture(to: 同じ高校View, goto: .up)
@@ -134,15 +143,11 @@ final class BraveInfectionVC: UIViewController {
     }
     
     private func setupScrollView(to point: CGPoint, screenSize: CGSize) {
-        print("point", point)
-        print("screenSize", screenSize)
-        
-        scrollView.delegate = self
-        scrollView.minimumZoomScale = 1.0
-        scrollView.maximumZoomScale = 3.0
+        // scrollView.minimumZoomScale = 1.0
+        // scrollView.maximumZoomScale = 3.0
         scrollView.zoomScale = 1.0
-        scrollView.showsHorizontalScrollIndicator = true
-        scrollView.showsVerticalScrollIndicator = true
+        // scrollView.showsHorizontalScrollIndicator = true
+        // scrollView.showsVerticalScrollIndicator = true
         
         scrollView.setContentOffset(CGPoint(x: point.x - screenSize.width * 3 / 2,
                                             y: point.y - screenSize.height / 2),
@@ -188,11 +193,13 @@ extension BraveInfectionVC {
     }
 }
 
+/*
 extension BraveInfectionVC: UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return contentView
     }
 }
+ */
 
 extension BraveInfectionVC: StoryboardInstantiatable {
     struct Dependency {
