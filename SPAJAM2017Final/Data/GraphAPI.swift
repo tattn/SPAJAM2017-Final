@@ -123,7 +123,8 @@ final class GraphAPI {
                             birthday: result["birthday"] as! String,
                             hometownName: (result["hometown"] as! [String: Any])["name"] as! String,
                             name: result["name"] as! String)
-                }
+                } + Mock.friends()
+                
                 print(friends)
                 completion(.success(friends))
             }
