@@ -22,7 +22,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" misplaced="YES" id="VN6-3Y-YmX">
-                                        <rect key="frame" x="-375" y="0.0" width="1125" height="1334"/>
+                                        <rect key="frame" x="-375" y="0.0" width="1125" height="2001"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="bgimage_gradation" id="v3V-dd-fEV">
@@ -151,6 +151,11 @@
                     <connections>
                         <outlet property="contentView" destination="VN6-3Y-YmX" id="2u7-zg-VQF"/>
                         <outlet property="scrollView" destination="WLk-P1-BBZ" id="U1S-lY-2Il"/>
+                        <outlet property="userIconView" destination="x5E-eN-2JH" id="BWV-61-VD9"/>
+                        <outlet property="同じ出身地View" destination="5Cw-Uf-daF" id="Kj7-Yn-kK6"/>
+                        <outlet property="同じ所在地View" destination="q76-Zw-B56" id="6Pa-iG-9Pc"/>
+                        <outlet property="同じ誕生日View" destination="27M-Hm-zeI" id="ued-Fm-VA5"/>
+                        <outlet property="同じ高校View" destination="1aP-Xi-ibP" id="9An-g8-AFB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

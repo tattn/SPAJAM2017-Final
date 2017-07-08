@@ -9,6 +9,8 @@
 import UIKit
 import Instantiate
 import InstantiateStandard
+import RxSwift
+import RxCocoa
 
 @IBDesignable class RotateView: UIView {
     
@@ -23,13 +25,13 @@ import InstantiateStandard
     }
 }
 
-@IBDesignable final public class RoundedView: UIView {
+@IBDesignable public class RoundedView: UIView {
     
     override public func layoutSubviews() {
         super.layoutSubviews()
         
         let shadowPath = UIBezierPath(rect: bounds)
-        layer.masksToBounds = false
+        layer.masksToBounds = true
         layer.shadowColor = UIColor.darkGray.cgColor
         layer.shadowOffset = CGSize(width: 0.1, height: 0.1)
         layer.shadowOpacity = 0.2
@@ -45,6 +47,11 @@ final class BraveInfectionVC: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var userIconView: UserIconView!
+    @IBOutlet weak var 同じ高校View: RoundedView!
+    @IBOutlet weak var 同じ誕生日View: RoundedView!
+    @IBOutlet weak var 同じ出身地View: RoundedView!
+    @IBOutlet weak var 同じ所在地View: RoundedView!
+    
     
     static var instantiateSource: InstantiateSource {
         return .identifier(className)
@@ -53,6 +60,83 @@ final class BraveInfectionVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        let doubleTapGesture = UITapGestureRecognizer(target: self, action:#selector(self.doubleTap))
+        doubleTapGesture.numberOfTapsRequired = 2
+        contentView.addGestureRecognizer(doubleTapGesture)
+
+        let screenSize = UIScreen.main.bounds.size
+        let center = CGPoint(x: screenSize.width * 3 / 2, y: screenSize.height * 3 / 2)
+        setupRoundedViews(center: center,screenSize: screenSize)
+        setupScrollView(to: center, screenSize: screenSize)
+        setupViewsLocation(to: center)
+    }
+
+    private enum Direction {
+        case up
+        case right
+        case down
+        case left
+        case none
+        
+        func diffFromCenter() -> CGPoint {
+            switch self {
+            case .up:
+                return CGPoint(x: 0, y: -200)
+            case .right:
+                return CGPoint(x: 135, y: 0)
+            case .down:
+                return CGPoint(x: 0, y: 200)
+            case .left:
+                return CGPoint(x: -125, y: 0)
+            case .none:
+                return .zero
+            }
+        }
+    }
+    
+    private func setupRoundedViews(center: CGPoint, screenSize: CGSize) {
+        print("center", center)
+        print("screenSize", screenSize)
+        func addGesture(to view: UIView, goto direction: Direction) {
+            var tapGesture = UITapGestureRecognizer()
+
+            view.addGestureRecognizer(tapGesture)
+            tapGesture.rx.event.subscribe(onNext: { _ in
+                switch direction {
+                case .up:
+                    self.scrollView.setContentOffset(CGPoint(x: center.x - screenSize.width * 3 / 2,
+                                                             y: 200),
+                                                     animated: true)
+                case .right:
+                    self.scrollView.setContentOffset(CGPoint(x: center.x - screenSize.width * 3 / 2 + screenSize.width - 100,
+                                                             y: center.y - screenSize.height / 2 - 50),
+                                                     animated: true)
+                case .down:
+                    self.scrollView.setContentOffset(CGPoint(x: center.x - screenSize.width * 3 / 2,
+                                                             y: center.y - screenSize.height / 2 + screenSize.height - 250),
+                                                     animated: true)
+                case .left:
+                    self.scrollView.setContentOffset(CGPoint(x: center.x - screenSize.width * 3 / 2 - screenSize.width + 100,
+                                                             y: center.y - screenSize.height / 2 - 50),
+                                                     animated: true)
+                case .none:
+                    print("fuck you")
+                }
+            })
+            .disposed(by: disposeBag)        
+        }
+        
+        addGesture(to: 同じ高校View, goto: .up)
+        addGesture(to: 同じ誕生日View, goto: .left)
+        addGesture(to: 同じ出身地View, goto: .right)
+        addGesture(to: 同じ所在地View, goto: .down)
+    }
+    
+    private func setupScrollView(to point: CGPoint, screenSize: CGSize) {
+        print("point", point)
+        print("screenSize", screenSize)
+        
         scrollView.delegate = self
         scrollView.minimumZoomScale = 1.0
         scrollView.maximumZoomScale = 3.0
@@ -60,17 +144,27 @@ final class BraveInfectionVC: UIViewController {
         scrollView.showsHorizontalScrollIndicator = true
         scrollView.showsVerticalScrollIndicator = true
         
-        let doubleTapGesture = UITapGestureRecognizer(target: self, action:#selector(self.doubleTap))
-        doubleTapGesture.numberOfTapsRequired = 2
-        contentView.addGestureRecognizer(doubleTapGesture)
+        scrollView.setContentOffset(CGPoint(x: point.x - screenSize.width * 3 / 2,
+                                            y: point.y - screenSize.height / 2),
+                                    animated: false)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    
+    private func setupViewsLocation(to point: CGPoint) {
+        func setup(view: UIView, direction: Direction = .none) {
+            view.frame = CGRect(origin: CGPoint(x: point.x - view.frame.size.width / 2 + direction.diffFromCenter().x,
+                                                y: point.y - view.frame.size.height / 2 + direction.diffFromCenter().y),
+                                        size: view.frame.size)
+        
+        }
+        
+        setup(view: userIconView)
+        setup(view: 同じ高校View, direction: .up)
+        setup(view: 同じ誕生日View, direction: .left)
+        setup(view: 同じ出身地View, direction: .right)
+        setup(view: 同じ所在地View, direction: .down)
     }
 }
 
-// doubleTap imp
 extension BraveInfectionVC {
     // http://qiita.com/yonezawaizumi/items/bd3f53b2f4d80f815357
     func doubleTap(gesture: UITapGestureRecognizer) -> Void {
