@@ -45,4 +45,8 @@ final class TopVC: UIViewController, StoryboardInstantiatable {
         .disposed(by: disposeBag)
     }
 
+    @IBAction func tapLoginButton(_ sender: Any) {
+        let loginVC = LoginVC()
+        present(loginVC, animated: true, completion: nil)
+    }
 }

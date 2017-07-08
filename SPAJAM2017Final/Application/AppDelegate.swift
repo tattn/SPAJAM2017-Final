@@ -11,6 +11,7 @@ import Alert
 import RealmSwift
 import Version
 import UserNotifications
+import FBSDKCoreKit
 
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,6 +19,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
 
         if UserDefaults.standard.string(for: .previousLaunchAppVersion) == nil {
             // First launching
@@ -55,11 +57,18 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
+        FBSDKAppEvents.activateApp()
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
     }
-
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        return FBSDKApplicationDelegate.sharedInstance().application(app,
+                                                                     open: url,
+                                                                     sourceApplication: options[.sourceApplication] as! String,
+                                                                     annotation: options[.annotation])
+    }
 }
 
 // MARK: - Push Notification

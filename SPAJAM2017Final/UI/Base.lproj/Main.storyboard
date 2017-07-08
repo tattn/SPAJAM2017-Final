@@ -12,7 +12,7 @@
         <!--TopVC-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="TopVC" title="TopVC" id="BYZ-38-t0r" customClass="TopVC" customModule="HackathonStarter" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TopVC" title="TopVC" id="BYZ-38-t0r" customClass="TopVC" customModule="SPAJAM2017Final" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -33,6 +33,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m4v-7d-OM2">
+                                <rect key="frame" x="166" y="596" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Login"/>
+                                <connections>
+                                    <action selector="tapLoginButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DjJ-1q-kBS"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -59,7 +67,7 @@
                     <toolbarItems/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vPD-Lr-asS">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="vPD-Lr-asS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
