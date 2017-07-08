@@ -26,7 +26,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="bgimage_gradation" id="v3V-dd-fEV">
-                                                <rect key="frame" x="0.0" y="0.0" width="1125" height="1334"/>
+                                                <rect key="frame" x="0.0" y="100" width="1125" height="1334"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
                                             <view contentMode="scaleToFill" misplaced="YES" id="b1h-ub-EtT" customClass="RotateView" customModule="SPAJAM2017Final" customModuleProvider="target">
