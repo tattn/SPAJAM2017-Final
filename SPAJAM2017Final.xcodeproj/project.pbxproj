@@ -100,7 +100,7 @@
 		243F948A1D25852500C302D0 /* CoreFunctionExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreFunctionExtension.swift; sourceTree = "<group>"; };
 		243F948C1D2585DA00C302D0 /* AppSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSize.swift; sourceTree = "<group>"; };
 		243F948F1D25874800C302D0 /* IBDesignable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IBDesignable.swift; sourceTree = "<group>"; };
-		24410D671D2427A9008B0A97 /* HackathonStarter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HackathonStarter.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		24410D671D2427A9008B0A97 /* SPAJAM2017Final.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SPAJAM2017Final.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24410D6A1D2427A9008B0A97 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		24410D6C1D2427A9008B0A97 /* TopVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopVC.swift; sourceTree = "<group>"; };
 		24410D6F1D2427AA008B0A97 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -189,23 +189,23 @@
 			isa = PBXGroup;
 			children = (
 				2441B2B21EE0670C0065A0A6 /* Frameworks */,
-				24410D691D2427A9008B0A97 /* HackathonStarter */,
 				24410D681D2427A9008B0A97 /* Products */,
 				244274E21D3FD42400088A78 /* Resources */,
 				2441B2A71EE066CF0065A0A6 /* RxHelper */,
+				24410D691D2427A9008B0A97 /* SPAJAM2017Final */,
 			);
 			sourceTree = "<group>";
 		};
 		24410D681D2427A9008B0A97 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				24410D671D2427A9008B0A97 /* HackathonStarter.app */,
+				24410D671D2427A9008B0A97 /* SPAJAM2017Final.app */,
 				2441B2A61EE066CF0065A0A6 /* RxHelper.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		24410D691D2427A9008B0A97 /* HackathonStarter */ = {
+		24410D691D2427A9008B0A97 /* SPAJAM2017Final */ = {
 			isa = PBXGroup;
 			children = (
 				247A9D2B1EDACD0400D929FF /* Application */,
@@ -218,7 +218,8 @@
 				24410D761D2427AA008B0A97 /* Info.plist */,
 				24410D731D2427AA008B0A97 /* LaunchScreen.storyboard */,
 			);
-			path = HackathonStarter;
+			name = SPAJAM2017Final;
+			path = SPAJAM2017Final;
 			sourceTree = "<group>";
 		};
 		24410D7E1D242A00008B0A97 /* Extension */ = {
@@ -396,7 +397,6 @@
 				249269551EDC5E2C00C24E40 /* SimpleListVC.storyboard */,
 				249269571EDC5EC600C24E40 /* SimpleListVC.swift */,
 			);
-			name = SimpleTableView;
 			path = SimpleTableView;
 			sourceTree = "<group>";
 		};
@@ -407,7 +407,6 @@
 				24A83B7E1EEAFA7000F72A23 /* SimpleCollectionVC.swift */,
 				24A83B7A1EEAF9B600F72A23 /* SimpleCollectionViewCell.xib */,
 			);
-			name = SimpleCollectionView;
 			path = SimpleCollectionView;
 			sourceTree = "<group>";
 		};
@@ -425,9 +424,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		24410D661D2427A9008B0A97 /* HackathonStarter */ = {
+		24410D661D2427A9008B0A97 /* SPAJAM2017Final */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 24410D791D2427AA008B0A97 /* Build configuration list for PBXNativeTarget "HackathonStarter" */;
+			buildConfigurationList = 24410D791D2427AA008B0A97 /* Build configuration list for PBXNativeTarget "SPAJAM2017Final" */;
 			buildPhases = (
 				242C3BEB1D27A93C00BF7992 /* Run Script - Carthage */,
 				24410D631D2427A9008B0A97 /* Sources */,
@@ -440,9 +439,9 @@
 			dependencies = (
 				2441B2AC1EE066CF0065A0A6 /* PBXTargetDependency */,
 			);
-			name = HackathonStarter;
+			name = SPAJAM2017Final;
 			productName = HackathonStarter;
-			productReference = 24410D671D2427A9008B0A97 /* HackathonStarter.app */;
+			productReference = 24410D671D2427A9008B0A97 /* SPAJAM2017Final.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2441B2A51EE066CF0065A0A6 /* RxHelper */ = {
@@ -484,7 +483,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 24410D621D2427A9008B0A97 /* Build configuration list for PBXProject "HackathonStarter" */;
+			buildConfigurationList = 24410D621D2427A9008B0A97 /* Build configuration list for PBXProject "SPAJAM2017Final" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -497,7 +496,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				24410D661D2427A9008B0A97 /* HackathonStarter */,
+				24410D661D2427A9008B0A97 /* SPAJAM2017Final */,
 				2441B2A51EE066CF0065A0A6 /* RxHelper */,
 			);
 		};
@@ -757,7 +756,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = HackathonStarter/Info.plist;
+				INFOPLIST_FILE = SPAJAM2017Final/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
@@ -776,7 +775,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = HackathonStarter/Info.plist;
+				INFOPLIST_FILE = SPAJAM2017Final/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
@@ -847,7 +846,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		24410D621D2427A9008B0A97 /* Build configuration list for PBXProject "HackathonStarter" */ = {
+		24410D621D2427A9008B0A97 /* Build configuration list for PBXProject "SPAJAM2017Final" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				24410D771D2427AA008B0A97 /* Debug */,
@@ -856,7 +855,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		24410D791D2427AA008B0A97 /* Build configuration list for PBXNativeTarget "HackathonStarter" */ = {
+		24410D791D2427AA008B0A97 /* Build configuration list for PBXNativeTarget "SPAJAM2017Final" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				24410D7A1D2427AA008B0A97 /* Debug */,

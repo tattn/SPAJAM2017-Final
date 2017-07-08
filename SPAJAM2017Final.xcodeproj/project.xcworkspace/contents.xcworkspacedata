@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:HackathonStarter.xcodeproj">
+      location = "self:/Users/tatstana/work/iOS/spajam2017-final/ios/SPAJAM2017Final.xcodeproj">
    </FileRef>
 </Workspace>
