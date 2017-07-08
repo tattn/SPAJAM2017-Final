@@ -53,7 +53,7 @@ final class TopVC: UIViewController, StoryboardInstantiatable {
         Login.login(from: self) {
             GraphAPI.me { _ in
                 GraphAPI.friends { _ in
-                    GraphAPI.profile(userId: "AaKkuJKiQZQQz1RswDyK7orEX4Zlg-X6XLHdJuadOtsKQ3HpvQLAsFqzi7aItE1QlMIf8cYBUEq4r1bpGaIZAOZgnCHcNMAcynNhLqRfwzjkAQ") { _ in
+                    GraphAPI.profile(userId: "747789068725242") { _ in
                     }
                 }
             }

@@ -21,7 +21,11 @@ struct GraphMe {
     let name: String
 
     struct Work {
-        
+        let employerName: String // hoge株式会社
+        let startDate: String // 0000-00 // 未設定？
+        let id: String
+        let locationName: String
+        let positionName: String // エンジニア
     }
 }
 
@@ -44,7 +48,13 @@ final class GraphAPI {
             if let result = result as? [String: Any] {
                 let graphMe = GraphMe(gender: result["gender"] as! String,
                                       locationName: (result["location"] as! [String: Any])["name"] as! String,
-                                      works: [],
+                                      works: (result["work"] as! [[String: Any]]).map {
+                                        GraphMe.Work.init(employerName: ($0["employer"] as! [String: Any])["name"] as! String,
+                                                          startDate: $0["start_date"] as! String,
+                                                          id: $0["id"] as! String,
+                                                          locationName: ($0["location"] as! [String: Any])["name"] as! String,
+                                                          positionName: ($0["position"] as! [String: Any])["name"] as! String)
+                    },
                                       id: result["id"] as! String,
                                       birthday: result["birthday"] as! String,
                                       hometownName: (result["hometown"] as! [String: Any])["name"] as! String,
@@ -55,7 +65,8 @@ final class GraphAPI {
         })
     }
     
-    static func friends(completion: @escaping (Result<[TaggableFriend], NSError>) -> Void) {
+//    static func friends(completion: @escaping (Result<[TaggableFriend], NSError>) -> Void) {
+    static func friends(completion: @escaping (Result<[GraphMe], NSError>) -> Void) {
         guard FBSDKAccessToken.current() != nil else { return }
         
         let params: [String: String] = ["fields": "id,name,picture", "locale": "ja_JP"]
@@ -96,7 +107,7 @@ final class GraphAPI {
             //let graphRequest = FBSDKGraphRequest(graphPath: "me/taggable_friends", parameters: params)
             // 同じアプリを承認している友達を取得 (https://developers.facebook.com/docs/graph-api/reference/user/friends )
             let graphRequest = FBSDKGraphRequest(graphPath: "me/friends", parameters: ["fields": params, "limit": "\(counts)", "locale": "ja_JP"])
-            graphRequest?.start { connection, result, error in
+            graphRequest?.start { _, result, error in
                 
                 if let error = error {
                     print("graph taggable_friends: \(error)")
@@ -104,15 +115,17 @@ final class GraphAPI {
                 }
                 
                 guard let result = result as? [String: Any] else { return }
-
-                print(result)
-//                do {
-//                    let friends = try [User].decode(friends)
-//                    completion(.Success(data: friends))
-//                } catch {
-//                    print(error)
-//                    completion(.Failure)
-//                }
+                let friends = (result["data"] as! [[String: Any]]).map { result in
+                    GraphMe(gender: result["gender"] as! String,
+                            locationName: (result["location"] as! [String: Any])["name"] as! String,
+                            works: [],
+                            id: result["id"] as! String,
+                            birthday: result["birthday"] as! String,
+                            hometownName: (result["hometown"] as! [String: Any])["name"] as! String,
+                            name: result["name"] as! String)
+                }
+                print(friends)
+                completion(.success(friends))
             }
         })
     }
