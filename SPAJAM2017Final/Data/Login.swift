@@ -18,7 +18,7 @@ final class Login {
         }
         
         let permissions: [String] = [
-            "public_profile", "user_friends", "user_birthday", "user_education_history", "user_events", "user_hometown", "user_likes", "user_location", "user_work_history"
+            "public_profile", "user_friends", "user_birthday", "user_education_history", "user_posts", "user_hometown", "user_likes", "user_location", "user_work_history"
         ]
         
         let login = FBSDKLoginManager()
