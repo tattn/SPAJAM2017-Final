@@ -11,7 +11,8 @@ F(gender: "#{["男性", "女性"].sample}",
   id: "??????????",
   birthday: "#{Random.rand(Date.parse("1970/01/01") .. Date.parse("2000/01/01")).strftime('%m/%d/%Y')}",
   hometownName: "#{location.call}",
-  name: "#{["松永 利恵", '嶋村　勝哉', '平野　さき', '丸　麻子', '田崎　愛衣', '倉持　歩夢', '宮岸　裕人','片田　奨平'].sample}")
+  name: "#{["松永 利恵", '嶋村　勝哉', '平野　さき', '丸　麻子', '田崎　愛衣', '倉持　歩夢', '宮岸　裕人','片田　奨平'].sample}",
+  iconUrl: "#{["http://dic.nicovideo.jp/oekaki/674964.png"].sample}")
 MOCK
 end
 

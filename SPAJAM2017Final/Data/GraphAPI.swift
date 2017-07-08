@@ -19,6 +19,7 @@ struct GraphMe {
     let birthday: String // MM/HH/YYYY
     let hometownName: String
     let name: String
+    let iconUrl: String
 
     struct Work {
         let employerName: String // hoge株式会社
@@ -37,12 +38,21 @@ struct TaggableFriend {
 struct Feed {
     let message: String?
     let id: String?
+    let caption: String?
+    let description: String?
+    let icon: String?
+    let link: String?
+    let name: String?
+    let shares: String?
+    let message_tags: Any?
+    let objectType: String? // enum{link, status, photo, video, offer}
+    let objectId: String?
 }
 
 final class GraphAPI {
     static func me(completion: @escaping (Result<GraphMe, NSError>) -> Void) {
         guard FBSDKAccessToken.current() != nil else { return }
-        let params: [String: String] = ["fields": "name,about,birthday,hometown,gender,location,work", "locale": "ja_JP"]
+        let params: [String: String] = ["fields": "name,about,birthday,hometown,gender,location,work,picture.type(large)", "locale": "ja_JP"]
         let request = FBSDKGraphRequest(graphPath: "me", parameters: params)
         _ = request?.start(completionHandler: { (_, result, error) in
             if let error = error {
@@ -63,7 +73,8 @@ final class GraphAPI {
                                       id: result["id"] as! String,
                                       birthday: result["birthday"] as! String,
                                       hometownName: (result["hometown"] as! [String: Any])["name"] as! String,
-                                      name: result["name"] as! String)
+                                      name: result["name"] as! String,
+                                      iconUrl: ((result["picture"] as! [String: Any])["data"] as! [String: Any])["url"] as! String)
                 print(graphMe)
                 completion(.success(graphMe))
             }
@@ -88,7 +99,7 @@ final class GraphAPI {
             let summary = result["summary"] as! NSDictionary
             let counts = summary["total_count"] as! Int
             
-            let params = "name,about,birthday,hometown,gender,location,work"
+            let params = "name,about,birthday,hometown,gender,location,work,picture.type(large)"
 //            let graphRequest: FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me/taggable_friends", parameters: ["fields": params, "limit": "\(counts)", "locale": "ja_JP"])
 //            graphRequest.start( completionHandler: { (_, result, error) -> Void in
 //                
@@ -123,11 +134,18 @@ final class GraphAPI {
                 let friends = (result["data"] as! [[String: Any]]).map { result in
                     GraphMe(gender: result["gender"] as! String,
                             locationName: (result["location"] as! [String: Any])["name"] as! String,
-                            works: [],
+                            works: (result["work"] as! [[String: Any]]).map {
+                                GraphMe.Work.init(employerName: ($0["employer"] as! [String: Any])["name"] as! String,
+                                                  startDate: $0["start_date"] as! String,
+                                                  id: $0["id"] as! String,
+                                                  locationName: ($0["location"] as! [String: Any])["name"] as! String,
+                                                  positionName: ($0["position"] as! [String: Any])["name"] as! String)
+                        },
                             id: result["id"] as! String,
                             birthday: result["birthday"] as! String,
                             hometownName: (result["hometown"] as! [String: Any])["name"] as! String,
-                            name: result["name"] as! String)
+                            name: result["name"] as! String,
+                            iconUrl: ((result["picture"] as! [String: Any])["data"] as! [String: Any])["url"] as! String)
                 } + Mock.friends()
                 
                 print(friends)
@@ -139,7 +157,7 @@ final class GraphAPI {
     static func profile(userId: String, completion: @escaping (Result<GraphMe, NSError>) -> Void) {
         guard FBSDKAccessToken.current() != nil else { return }
         
-        let params: [String: String] = ["fields": "name,about,birthday,hometown,gender,location,work", "locale": "ja_JP"]
+        let params: [String: String] = ["fields": "name,about,birthday,hometown,gender,location,work,picture.type(large)", "locale": "ja_JP"]
         let request = FBSDKGraphRequest(graphPath: "/\(userId)", parameters: params)
         _ = request?.start(completionHandler: { (_, result, error) -> Void in
             if let error = error {
@@ -151,11 +169,18 @@ final class GraphAPI {
             
             let graphMe = GraphMe(gender: result["gender"] as! String,
                                   locationName: (result["location"] as! [String: Any])["name"] as! String,
-                                  works: [],
+                                  works: (result["work"] as! [[String: Any]]).map {
+                                    GraphMe.Work.init(employerName: ($0["employer"] as! [String: Any])["name"] as! String,
+                                                      startDate: $0["start_date"] as! String,
+                                                      id: $0["id"] as! String,
+                                                      locationName: ($0["location"] as! [String: Any])["name"] as! String,
+                                                      positionName: ($0["position"] as! [String: Any])["name"] as! String)
+                },
                                   id: result["id"] as! String,
                                   birthday: result["birthday"] as! String,
                                   hometownName: (result["hometown"] as! [String: Any])["name"] as! String,
-                                  name: result["name"] as! String)
+                                  name: result["name"] as! String,
+                                  iconUrl: ((result["picture"] as! [String: Any])["data"] as! [String: Any])["url"] as! String)
             print(graphMe)
             completion(.success(graphMe))
         })
@@ -164,7 +189,7 @@ final class GraphAPI {
     static func feed(userId: String, completion: @escaping (Result<[Feed], NSError>) -> Void) {
         guard FBSDKAccessToken.current() != nil else { return }
         
-        let params: [String: String] = ["fields": "message", "locale": "ja_JP", "limit": "\(100)"]
+        let params: [String: String] = ["fields": "message,caption,description,icon,link,name,shares,message_tags,object_type,object_id", "locale": "ja_JP", "limit": "\(100)"]
         let request = FBSDKGraphRequest(graphPath: "/\(userId)/feed", parameters: params)
         _ = request?.start(completionHandler: { (_, result, error) -> Void in
             
@@ -175,7 +200,58 @@ final class GraphAPI {
             
             guard let result = result as? [String: Any] else { return }
             
-            let feeds = (result["data"] as! [[String: Any]]).map { Feed(message: $0["message"] as? String, id: $0["id"] as? String) }
+            // ページングやりたい
+            // result["paging"]になんかはいってる
+            let feeds = (result["data"] as! [[String: Any]]).map {
+                Feed(message: $0["message"] as? String,
+                     id: $0["id"] as? String,
+                     caption: $0["caption"] as? String,
+                     description: $0["description"] as? String,
+                     icon: $0["icon"] as? String,
+                     link: $0["link"] as? String,
+                     name: $0["name"] as? String,
+                     shares: $0["shares"] as? String,
+                     message_tags: $0["message_tags"] as Any,
+                     objectType: $0["object_type"] as? String,
+                     objectId: $0["object_id"] as? String
+                )
+            }
+            
+            print(feeds)
+            completion(.success(feeds))
+        })
+    }
+    
+    static func photos(userId: String, completion: @escaping (Result<[Feed], NSError>) -> Void) {
+        guard FBSDKAccessToken.current() != nil else { return }
+        
+        let params: [String: String] = ["fields": "url", "locale": "ja_JP", "limit": "\(100)"]
+        let request = FBSDKGraphRequest(graphPath: "/\(userId)/photos", parameters: params)
+        _ = request?.start(completionHandler: { (_, result, error) -> Void in
+            
+            if let error = error {
+                print("graph friends: \(error)")
+                return
+            }
+            
+            guard let result = result as? [String: Any] else { return }
+            
+            // ページングやりたい
+            // result["paging"]になんかはいってる
+            let feeds = (result["data"] as! [[String: Any]]).map {
+                Feed(message: $0["message"] as? String,
+                     id: $0["id"] as? String,
+                     caption: $0["caption"] as? String,
+                     description: $0["description"] as? String,
+                     icon: $0["icon"] as? String,
+                     link: $0["link"] as? String,
+                     name: $0["name"] as? String,
+                     shares: $0["shares"] as? String,
+                     message_tags: $0["message_tags"] as Any,
+                     objectType: $0["object_type"] as? String,
+                     objectId: $0["object_id"] as? String
+                )
+            }
             
             print(feeds)
             completion(.success(feeds))
