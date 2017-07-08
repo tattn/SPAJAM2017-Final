@@ -62,17 +62,13 @@ final class BraveInfectionVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // let doubleTapGesture = UITapGestureRecognizer(target: self, action:#selector(self.doubleTap))
-        // doubleTapGesture.numberOfTapsRequired = 2
-        // contentView.addGestureRecognizer(doubleTapGesture)
-
         let screenSize = UIScreen.main.bounds.size
         let center = CGPoint(x: screenSize.width * 3 / 2, y: screenSize.height * 3 / 2)
-        setupRoundedViews(center: center,screenSize: screenSize)
+        setupRoundedViews(center: center, screenSize: screenSize)
         setupScrollView(to: center, screenSize: screenSize)
         setupViewsLocation(to: center)
     }
-
+    
     private enum Direction {
         case up
         case right
@@ -90,6 +86,20 @@ final class BraveInfectionVC: UIViewController {
                 return CGPoint(x: 0, y: 200)
             case .left:
                 return CGPoint(x: -135, y: 0)
+            case .none:
+                return .zero
+            }
+        }
+        func diffFromCenterForResults() -> CGPoint {
+            switch self {
+            case .up:
+                return CGPoint(x: 0, y: -400)
+            case .right:
+                return CGPoint(x: 335, y: 0)
+            case .down:
+                return CGPoint(x: 0, y: 400)
+            case .left:
+                return CGPoint(x: -335, y: 0)
             case .none:
                 return .zero
             }
@@ -142,11 +152,7 @@ final class BraveInfectionVC: UIViewController {
     }
     
     private func setupScrollView(to point: CGPoint, screenSize: CGSize) {
-        // scrollView.minimumZoomScale = 1.0
-        // scrollView.maximumZoomScale = 3.0
         scrollView.zoomScale = 1.0
-        // scrollView.showsHorizontalScrollIndicator = true
-        // scrollView.showsVerticalScrollIndicator = true
         
         let 謎のズレ: CGFloat = 57.0
         scrollView.setContentOffset(CGPoint(x: point.x - screenSize.width * 3 / 2,
@@ -156,9 +162,23 @@ final class BraveInfectionVC: UIViewController {
     
     private func setupViewsLocation(to point: CGPoint) {
         func setup(view: UIView, direction: Direction = .none) {
+            func setupResultButtons(center: CGPoint, direction: Direction = .none) {
+                let buttonSize = CGSize(width: 100.0, height: 100.0)
+                let button = UIButton(frame: CGRect(origin: CGPoint(x: center.x - buttonSize.width / 2 + direction.diffFromCenterForResults().x,
+                                                                    y: center.y - buttonSize.height / 2 + direction.diffFromCenterForResults().y),
+                                                    size: buttonSize))
+                button.setTitle("ああああああ", for: [])
+                button.backgroundColor = .red
+                self.contentView.addSubview(button)
+            }
+
             view.frame = CGRect(origin: CGPoint(x: point.x - view.frame.size.width / 2 + direction.diffFromCenter().x,
                                                 y: point.y - view.frame.size.height / 2 + direction.diffFromCenter().y),
                                         size: view.frame.size)
+            
+            if direction != .none {
+                setupResultButtons(center: point, direction: direction)
+            }
         
         }
         
@@ -169,38 +189,6 @@ final class BraveInfectionVC: UIViewController {
         setup(view: 同じ所在地View, direction: .down)
     }
 }
-
-extension BraveInfectionVC {
-    /*
-    // http://qiita.com/yonezawaizumi/items/bd3f53b2f4d80f815357
-    func doubleTap(gesture: UITapGestureRecognizer) -> Void {
-        if (scrollView.zoomScale < scrollView.maximumZoomScale ) {
-            let newScale:CGFloat = scrollView.zoomScale * 3
-            let zoomRect:CGRect = zoomRectForScale(scale: newScale, center: gesture.location(in: gesture.view))
-            scrollView.zoom(to: zoomRect, animated: true)
-        } else {
-            scrollView.setZoomScale(1.0, animated: true)
-        }
-    }
-    
-    func zoomRectForScale(scale: CGFloat, center: CGPoint) -> CGRect{
-        var zoomRect: CGRect = CGRect()
-        zoomRect.size.height = scrollView.frame.size.height / scale
-        zoomRect.size.width = scrollView.frame.size.width / scale
-        
-        zoomRect.origin.x = center.x - zoomRect.size.width / 2.0
-        zoomRect.origin.y = center.y - zoomRect.size.height / 2.0
-        return zoomRect
-    }*/
-}
-
-/*
-extension BraveInfectionVC: UIScrollViewDelegate {
-    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        return contentView
-    }
-}
- */
 
 extension BraveInfectionVC: StoryboardInstantiatable {
     struct Dependency {
