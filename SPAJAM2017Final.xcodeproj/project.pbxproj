@@ -45,12 +45,6 @@
 		244274F41D410CE100088A78 /* SwipeReturnable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244274F31D410CE100088A78 /* SwipeReturnable.swift */; };
 		244274FD1D4128D500088A78 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244274FC1D4128D500088A78 /* UIViewController+.swift */; };
 		24671AA21F11324C00EAF842 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24671A8A1F1130D200EAF842 /* Bolts.framework */; };
-		24671AA41F11324C00EAF842 /* FBAudienceNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24671A8F1F1130E600EAF842 /* FBAudienceNetwork.framework */; };
-		24671AA51F11324C00EAF842 /* FBAudienceNetworkDynamicFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24671A901F1130E600EAF842 /* FBAudienceNetworkDynamicFramework.framework */; };
-		24671AD01F11342000EAF842 /* FBAudienceNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24671A8F1F1130E600EAF842 /* FBAudienceNetwork.framework */; };
-		24671AD11F11342000EAF842 /* FBAudienceNetwork.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 24671A8F1F1130E600EAF842 /* FBAudienceNetwork.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		24671AD21F11342000EAF842 /* FBAudienceNetworkDynamicFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24671A901F1130E600EAF842 /* FBAudienceNetworkDynamicFramework.framework */; };
-		24671AD31F11342000EAF842 /* FBAudienceNetworkDynamicFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 24671A901F1130E600EAF842 /* FBAudienceNetworkDynamicFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		24671AD41F11342000EAF842 /* FBNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24671A911F1130E600EAF842 /* FBNotifications.framework */; };
 		24671AD51F11342000EAF842 /* FBNotifications.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 24671A911F1130E600EAF842 /* FBNotifications.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		24671AD61F11342000EAF842 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24671A921F1130E600EAF842 /* FBSDKCoreKit.framework */; };
@@ -115,7 +109,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				24671ADF1F11342000EAF842 /* FBSDKShareKit.framework in Embed Frameworks */,
-				24671AD31F11342000EAF842 /* FBAudienceNetworkDynamicFramework.framework in Embed Frameworks */,
 				24671AD71F11342000EAF842 /* FBSDKCoreKit.framework in Embed Frameworks */,
 				24671AD91F11342000EAF842 /* FBSDKLoginKit.framework in Embed Frameworks */,
 				24671AD51F11342000EAF842 /* FBNotifications.framework in Embed Frameworks */,
@@ -123,7 +116,6 @@
 				24671ADD1F11342000EAF842 /* FBSDKPlacesKit.framework in Embed Frameworks */,
 				24671AE71F11342600EAF842 /* RxHelper.framework in Embed Frameworks */,
 				24671ADB1F11342000EAF842 /* FBSDKMessengerShareKit.framework in Embed Frameworks */,
-				24671AD11F11342000EAF842 /* FBAudienceNetwork.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -174,8 +166,6 @@
 		244274F31D410CE100088A78 /* SwipeReturnable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeReturnable.swift; sourceTree = "<group>"; };
 		244274FC1D4128D500088A78 /* UIViewController+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		24671A8A1F1130D200EAF842 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
-		24671A8F1F1130E600EAF842 /* FBAudienceNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBAudienceNetwork.framework; sourceTree = "<group>"; };
-		24671A901F1130E600EAF842 /* FBAudienceNetworkDynamicFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBAudienceNetworkDynamicFramework.framework; sourceTree = "<group>"; };
 		24671A911F1130E600EAF842 /* FBNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBNotifications.framework; sourceTree = "<group>"; };
 		24671A921F1130E600EAF842 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		24671A931F1130E600EAF842 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
@@ -208,17 +198,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				24671ADC1F11342000EAF842 /* FBSDKPlacesKit.framework in Frameworks */,
-				24671AD21F11342000EAF842 /* FBAudienceNetworkDynamicFramework.framework in Frameworks */,
 				24671AA21F11324C00EAF842 /* Bolts.framework in Frameworks */,
 				24671ADA1F11342000EAF842 /* FBSDKMessengerShareKit.framework in Frameworks */,
 				24671AD61F11342000EAF842 /* FBSDKCoreKit.framework in Frameworks */,
-				24671AA41F11324C00EAF842 /* FBAudienceNetwork.framework in Frameworks */,
 				24671AE61F11342600EAF842 /* RxHelper.framework in Frameworks */,
-				24671AD01F11342000EAF842 /* FBAudienceNetwork.framework in Frameworks */,
 				24671ADE1F11342000EAF842 /* FBSDKShareKit.framework in Frameworks */,
 				24671AD81F11342000EAF842 /* FBSDKLoginKit.framework in Frameworks */,
 				24671AD41F11342000EAF842 /* FBNotifications.framework in Frameworks */,
-				24671AA51F11324C00EAF842 /* FBAudienceNetworkDynamicFramework.framework in Frameworks */,
 				24671AE31F11342000EAF842 /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -319,8 +305,6 @@
 		2441B2B21EE0670C0065A0A6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				24671A8F1F1130E600EAF842 /* FBAudienceNetwork.framework */,
-				24671A901F1130E600EAF842 /* FBAudienceNetworkDynamicFramework.framework */,
 				24671A911F1130E600EAF842 /* FBNotifications.framework */,
 				24671A921F1130E600EAF842 /* FBSDKCoreKit.framework */,
 				24671A931F1130E600EAF842 /* FBSDKLoginKit.framework */,
