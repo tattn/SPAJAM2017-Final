@@ -64,11 +64,11 @@ final class BraveInfectionVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
 
-        let screenSize = UIScreen.main.bounds.size
 
+        ProgressHUD.show(title: "Facebookからデータを\n読み込んでいます", ignoreInteraction: true)
+
+        let screenSize = UIScreen.main.bounds.size
         let center = CGPoint(x: screenSize.width * 3 / 2, y: screenSize.height * 3 / 2)
-        setupRoundedViews(center: center, screenSize: screenSize)
-        setupViewsLocation(to: center)
 
         self.setupScrollView(to: center, screenSize: screenSize)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
@@ -77,23 +77,31 @@ final class BraveInfectionVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var tapGesture = UITapGestureRecognizer()
-        floatingButton.addGestureRecognizer(tapGesture)
-        tapGesture.rx.event.subscribe(onNext: { _ in
-            self.navigationController?.setNavigationBarHidden(false, animated: false)
-            self.navigationController?.pushViewController(EpisodePostVC.instantiate(with: .init(title: "エピソードを投稿する")), animated: true)
-        })
-            .disposed(by: disposeBag)
-        
-        tapGesture = UITapGestureRecognizer()
-        userIconView.addGestureRecognizer(tapGesture)
-        tapGesture.rx.event.subscribe(onNext: { _ in
-            self.navigationController?.setNavigationBarHidden(false, animated: false)
-            self.navigationController?.pushViewController(MyEpisodeVC.instantiate(with: .init(title: "あなたのエピソード")), animated: true)
-        })
-            .disposed(by: disposeBag)
-        
-        userIconView.setup(userName: TopVC.me!.name, userDescription: "これはあなたです", imageURL: URL(string: TopVC.me!.iconUrl)!)
+        TopVC.fetchFacebookData(view: self) {
+            var tapGesture = UITapGestureRecognizer()
+            self.floatingButton.addGestureRecognizer(tapGesture)
+            tapGesture.rx.event.subscribe(onNext: { _ in
+                self.navigationController?.setNavigationBarHidden(false, animated: false)
+                self.navigationController?.pushViewController(EpisodeVC.instantiate(with: .init(title: "エピソードを投稿する")), animated: true)
+            }).disposed(by: self.disposeBag)
+            
+            tapGesture = UITapGestureRecognizer()
+            self.userIconView.addGestureRecognizer(tapGesture)
+            tapGesture.rx.event.subscribe(onNext: { _ in
+                self.navigationController?.setNavigationBarHidden(false, animated: false)
+                self.navigationController?.pushViewController(MyEpisodeVC.instantiate(with: .init(title: "あなた のエピソード")), animated: true)
+            }).disposed(by: self.disposeBag)
+            
+            self.userIconView.setup(userName: TopVC.me!.name, userDescription: "これはあなたです", imageURL: URL(string: TopVC.me!.iconUrl)!)
+            
+            let screenSize = UIScreen.main.bounds.size
+            let center = CGPoint(x: screenSize.width * 3 / 2, y: screenSize.height * 3 / 2)
+            
+            self.setupRoundedViews(center: center, screenSize: screenSize)
+            self.setupViewsLocation(to: center)
+
+            ProgressHUD.dismiss()
+        }
     }
     
     private enum Direction {
@@ -241,25 +249,13 @@ final class BraveInfectionVC: UIViewController {
         setup(view: 同じ所在地View, point: point, direction: .down)
     }
     
-    private var counter = 0
     private func setup(view: UIView, point: CGPoint, direction: Direction = .none) {
-        func setupResultButtons(center: CGPoint, direction: Direction = .none, number: Int = 4) {
-            func createButton(defaultPoint: CGPoint, buttonSize: CGSize) {
+        func setupResultButtons(center: CGPoint, direction: Direction = .none, friends: [GraphMe], limit: Int) {
+            func createButton(defaultPoint: CGPoint, buttonSize: CGSize, friend: GraphMe) {
                 let view = UserIconView(frame: CGRect(origin: defaultPoint, size: buttonSize))
-                let me = TopVC.me!
-                let friend = TopVC.friends![counter]
-                counter += 1
-                
-                view.setup(userName: friend.name, userDescription: friend.works.first?.employerName ?? "", imageURL: URL(string: friend.iconUrl)!)
-                
-                var tapGesture = UITapGestureRecognizer()
-                view.addGestureRecognizer(tapGesture)
-                tapGesture.rx.event.subscribe(onNext: { _ in
-                    self.navigationController?.setNavigationBarHidden(false, animated: false)
-                    self.navigationController?.pushViewController(EpisodeVC.instantiate(with: .init(title: "\(friend.name) のエピソード")), animated: true)
-                })
-                    .disposed(by: disposeBag)
-                
+                view.setup(userName: friend.name,
+                           userDescription: friend.works.first?.employerName ?? "",
+                           imageURL: URL(string: friend.iconUrl)!)
                 self.contentView.addSubview(view)
             }
             
@@ -267,23 +263,27 @@ final class BraveInfectionVC: UIViewController {
             var defaultPoint = CGPoint(x: center.x - buttonSize.width / 2 + direction.diffFromCenterForResults().x,
                                        y: center.y - buttonSize.height / 2 + direction.diffFromCenterForResults().y)
             
-            createButton(defaultPoint: defaultPoint, buttonSize: buttonSize)
-            
-            for i in 0 ..< number - 1 {
+            createButton(defaultPoint: defaultPoint, buttonSize: buttonSize, friend: friends[0])
+
+            for i in 1 ..< limit {
                 if i % 3 == 0 {
+                    createButton(defaultPoint: defaultPoint,
+                                 buttonSize: buttonSize,
+                                 friend: friends[i])
+                } else if i % 3 == 1 {
                     defaultPoint = CGPoint(x: defaultPoint.x + direction.margin(plus: buttonSize).x,
                                            y: defaultPoint.y + direction.margin(plus: buttonSize).y)
-                    createButton(defaultPoint: defaultPoint, buttonSize: buttonSize)
-                } else if i % 3 == 1 {
+
                     createButton(defaultPoint: CGPoint(x: defaultPoint.x + direction.marginLeft(plus: buttonSize).x,
                                                        y: defaultPoint.y + direction.marginLeft(plus: buttonSize).y),
-                                 buttonSize: buttonSize)
+                                 buttonSize: buttonSize,
+                                 friend: friends[i])
                 } else {
                     createButton(defaultPoint: CGPoint(x: defaultPoint.x + direction.marginRight(plus: buttonSize).x,
                                                        y: defaultPoint.y + direction.marginRight(plus: buttonSize).y),
-                                 buttonSize: buttonSize)
+                                 buttonSize: buttonSize,
+                                 friend: friends[i])
                 }
-                
             }
         }
         
@@ -291,16 +291,22 @@ final class BraveInfectionVC: UIViewController {
                                             y: point.y - view.frame.size.height / 2 + direction.diffFromCenter().y),
                             size: view.frame.size)
         
+        let friends = TopVC.friends!
+        // let me = TopVC.me!
+        
         switch direction {
         case .none:
             break
-        case .up, .down:
-            setupResultButtons(center: point, direction: direction, number: 10)
-        case .right, .left:
-            setupResultButtons(center: point, direction: direction, number: 4)
+        // ここでfilterをかける
+        case .up:
+            setupResultButtons(center: point, direction: direction, friends: friends, limit: 10)
+        case .down:
+            setupResultButtons(center: point, direction: direction, friends: friends, limit: 10)
+        case .right:
+            setupResultButtons(center: point, direction: direction, friends: friends, limit: 4)
+        case .left:
+            setupResultButtons(center: point, direction: direction, friends: friends, limit: 4)
         }
-        
-        counter = 0
     }
 }
 

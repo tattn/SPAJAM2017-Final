@@ -578,7 +578,7 @@
 				TargetAttributes = {
 					24410D661D2427A9008B0A97 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = MS8D8N57LJ;
+						DevelopmentTeam = 73WMQ3G9Y2;
 						LastSwiftMigration = 0830;
 					};
 					2441B2A51EE066CF0065A0A6 = {
@@ -871,7 +871,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = MS8D8N57LJ;
+				DEVELOPMENT_TEAM = 73WMQ3G9Y2;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -893,7 +893,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = MS8D8N57LJ;
+				DEVELOPMENT_TEAM = 73WMQ3G9Y2;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
