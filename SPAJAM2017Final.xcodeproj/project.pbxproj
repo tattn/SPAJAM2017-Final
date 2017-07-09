@@ -88,6 +88,7 @@
 		9B16BD231F11447F0009EE46 /* BraveInfectionVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B16BD221F11447F0009EE46 /* BraveInfectionVC.storyboard */; };
 		9B16BD251F1144A60009EE46 /* BraveInfectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B16BD241F1144A60009EE46 /* BraveInfectionVC.swift */; };
 		9B16BD291F11B39E0009EE46 /* MyEpisodeVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B16BD281F11B39E0009EE46 /* MyEpisodeVC.storyboard */; };
+		9B16BD2B1F11B9F90009EE46 /* MyEpisodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B16BD2A1F11B9F90009EE46 /* MyEpisodeVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -208,6 +209,7 @@
 		9B16BD221F11447F0009EE46 /* BraveInfectionVC.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = BraveInfectionVC.storyboard; path = Common/BraveInfectionVC.storyboard; sourceTree = "<group>"; };
 		9B16BD241F1144A60009EE46 /* BraveInfectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BraveInfectionVC.swift; sourceTree = "<group>"; };
 		9B16BD281F11B39E0009EE46 /* MyEpisodeVC.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MyEpisodeVC.storyboard; sourceTree = "<group>"; };
+		9B16BD2A1F11B9F90009EE46 /* MyEpisodeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyEpisodeVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -425,6 +427,7 @@
 				044C78751F114C4A00884868 /* UserIconView.swift */,
 				044C78771F114C6300884868 /* UserIconView.xib */,
 				9B16BD281F11B39E0009EE46 /* MyEpisodeVC.storyboard */,
+				9B16BD2A1F11B9F90009EE46 /* MyEpisodeVC.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -696,6 +699,7 @@
 				243F948D1D2585DA00C302D0 /* AppSize.swift in Sources */,
 				243F94841D25815500C302D0 /* Ionicons.swift in Sources */,
 				24410D951D243538008B0A97 /* UIImage+.swift in Sources */,
+				9B16BD2B1F11B9F90009EE46 /* MyEpisodeVC.swift in Sources */,
 				247D6D541D47CEBE005864EC /* UIFont+.swift in Sources */,
 				244274D11D3F4B5F00088A78 /* UIImageView+.swift in Sources */,
 				244274FD1D4128D500088A78 /* UIViewController+.swift in Sources */,
