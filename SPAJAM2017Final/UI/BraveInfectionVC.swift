@@ -246,6 +246,7 @@ final class BraveInfectionVC: UIViewController {
         func setupResultButtons(center: CGPoint, direction: Direction = .none, number: Int = 4) {
             func createButton(defaultPoint: CGPoint, buttonSize: CGSize) {
                 let view = UserIconView(frame: CGRect(origin: defaultPoint, size: buttonSize))
+                let me = TopVC.me!
                 let friend = TopVC.friends![counter]
                 counter += 1
                 
