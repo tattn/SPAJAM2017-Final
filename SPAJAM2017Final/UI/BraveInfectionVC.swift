@@ -53,6 +53,8 @@ final class BraveInfectionVC: UIViewController {
     @IBOutlet weak var 同じ出身地View: RoundedView!
     @IBOutlet weak var 同じ所在地View: RoundedView!
     
+    @IBOutlet weak var floatingButton: UIButton!
+    
     private var isCenter = true
     
     static var instantiateSource: InstantiateSource {
@@ -61,6 +63,14 @@ final class BraveInfectionVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        var tapGesture = UITapGestureRecognizer()
+        floatingButton.addGestureRecognizer(tapGesture)
+        tapGesture.rx.event.subscribe(onNext: { _ in
+            self.navigationController?.setNavigationBarHidden(false, animated: false)
+            self.navigationController?.pushViewController(MyEpisodeVC.instantiate(with: .init(title: "あなたたた のエピソード")), animated: true)
+        })
+            .disposed(by: disposeBag)
         
         let screenSize = UIScreen.main.bounds.size
         let center = CGPoint(x: screenSize.width * 3 / 2, y: screenSize.height * 3 / 2)
@@ -79,27 +89,73 @@ final class BraveInfectionVC: UIViewController {
         func diffFromCenter() -> CGPoint {
             switch self {
             case .up:
-                return CGPoint(x: 0, y: -200)
+                return CGPoint(x: 0, y: -135)
             case .right:
                 return CGPoint(x: 135, y: 0)
             case .down:
-                return CGPoint(x: 0, y: 200)
+                return CGPoint(x: 0, y: 135)
             case .left:
                 return CGPoint(x: -135, y: 0)
             case .none:
                 return .zero
             }
         }
+        
         func diffFromCenterForResults() -> CGPoint {
             switch self {
             case .up:
-                return CGPoint(x: 0, y: -400)
+                return CGPoint(x: 0, y: -300)
             case .right:
-                return CGPoint(x: 335, y: 0)
+                return CGPoint(x: 280, y: 0)
             case .down:
-                return CGPoint(x: 0, y: 400)
+                return CGPoint(x: 0, y: 280)
             case .left:
-                return CGPoint(x: -335, y: 0)
+                return CGPoint(x: -280, y: 0)
+            case .none:
+                return .zero
+            }
+        }
+        
+        func margin(plus size: CGSize) -> CGPoint {
+            switch self {
+            case .up:
+                return CGPoint(x: 0, y: -20 - size.height)
+            case .right:
+                return CGPoint(x: 10 + size.width, y: 0)
+            case .down:
+                return CGPoint(x: 0, y: 10 + size.height)
+            case .left:
+                return CGPoint(x: -20 - size.width, y: 0)
+            case .none:
+                return .zero
+            }
+        }
+        
+        func marginLeft(plus size: CGSize) -> CGPoint {
+            switch self {
+            case .up:
+                return CGPoint(x: -(10 + size.height), y: (10 + size.height) / 2)
+            case .right:
+                return CGPoint(x: -(10 + size.width) / 2, y: -(10 + size.width))
+            case .down:
+                return CGPoint(x: (10 + size.height), y: -(10 + size.height) / 2)
+            case .left:
+                return CGPoint(x: (20 + size.width) / 2, y: (20 + size.width))
+            case .none:
+                return .zero
+            }
+        }
+
+        func marginRight(plus size: CGSize) -> CGPoint {
+            switch self {
+            case .up:
+                return CGPoint(x: (20 + size.height), y: (20 + size.height) / 2)
+            case .right:
+                return CGPoint(x: -(10 + size.width) / 2, y: (10 + size.width))
+            case .down:
+                return CGPoint(x: -(10 + size.height), y: -(10 + size.height) / 2)
+            case .left:
+                return CGPoint(x: (20 + size.width) / 2, y: -(20 + size.width))
             case .none:
                 return .zero
             }
@@ -162,23 +218,48 @@ final class BraveInfectionVC: UIViewController {
     
     private func setupViewsLocation(to point: CGPoint) {
         func setup(view: UIView, direction: Direction = .none) {
-            func setupResultButtons(center: CGPoint, direction: Direction = .none) {
-                let buttonSize = CGSize(width: 100.0, height: 100.0)
-                let defaultPoint = CGPoint(x: center.x - buttonSize.width / 2 + direction.diffFromCenterForResults().x,
+            func setupResultButtons(center: CGPoint, direction: Direction = .none, number: Int = 4) {
+                func createButton(defaultPoint: CGPoint, buttonSize: CGSize) {
+                    let view = UserIconView(frame: CGRect(origin: defaultPoint, size: buttonSize))
+                    self.contentView.addSubview(view)
+                }
+                
+                let buttonSize = CGSize(width: 115.0, height: 115.0)
+                var defaultPoint = CGPoint(x: center.x - buttonSize.width / 2 + direction.diffFromCenterForResults().x,
                                            y: center.y - buttonSize.height / 2 + direction.diffFromCenterForResults().y)
-                let view = UIView(frame: CGRect(origin: defaultPoint, size: buttonSize))
-                view.backgroundColor = .red
-                self.contentView.addSubview(view)
+                
+                createButton(defaultPoint: defaultPoint, buttonSize: buttonSize)
+                
+                for i in 0 ..< number - 1 {
+                    if i % 3 == 0 {
+                        defaultPoint = CGPoint(x: defaultPoint.x + direction.margin(plus: buttonSize).x,
+                                               y: defaultPoint.y + direction.margin(plus: buttonSize).y)
+                        createButton(defaultPoint: defaultPoint, buttonSize: buttonSize)
+                    } else if i % 3 == 1 {
+                        createButton(defaultPoint: CGPoint(x: defaultPoint.x + direction.marginLeft(plus: buttonSize).x,
+                                                           y: defaultPoint.y + direction.marginLeft(plus: buttonSize).y),
+                                     buttonSize: buttonSize)
+                    } else {
+                        createButton(defaultPoint: CGPoint(x: defaultPoint.x + direction.marginRight(plus: buttonSize).x,
+                                                           y: defaultPoint.y + direction.marginRight(plus: buttonSize).y),
+                                     buttonSize: buttonSize)
+                    }
+                
+                }
             }
 
             view.frame = CGRect(origin: CGPoint(x: point.x - view.frame.size.width / 2 + direction.diffFromCenter().x,
                                                 y: point.y - view.frame.size.height / 2 + direction.diffFromCenter().y),
                                         size: view.frame.size)
             
-            if direction != .none {
-                setupResultButtons(center: point, direction: direction)
+            switch direction {
+            case .none:
+                break
+            case .up, .down:
+                setupResultButtons(center: point, direction: direction, number: 10)
+            case .right, .left:
+                setupResultButtons(center: point, direction: direction, number: 4)
             }
-        
         }
         
         setup(view: userIconView)

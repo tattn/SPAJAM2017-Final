@@ -30,7 +30,7 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
                                             <view contentMode="scaleToFill" misplaced="YES" id="b1h-ub-EtT" customClass="RotateView" customModule="SPAJAM2017Final" customModuleProvider="target">
-                                                <rect key="frame" x="559" y="667" width="6" height="667"/>
+                                                <rect key="frame" x="559" y="667" width="2" height="667"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.96068006750000001" green="0.96084433790000001" blue="0.96066969629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <userDefinedRuntimeAttributes>
@@ -40,7 +40,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" misplaced="YES" id="HSQ-U6-7sa" customClass="RotateView" customModule="SPAJAM2017Final" customModuleProvider="target">
-                                                <rect key="frame" x="559" y="667" width="6" height="667"/>
+                                                <rect key="frame" x="559" y="667" width="2" height="667"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.96068006750000001" green="0.96084433790000001" blue="0.96066969629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <userDefinedRuntimeAttributes>
@@ -50,7 +50,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" misplaced="YES" id="x5E-eN-2JH" customClass="UserIconView" customModule="SPAJAM2017Final" customModuleProvider="target">
-                                                <rect key="frame" x="488" y="313" width="142" height="142"/>
+                                                <rect key="frame" x="488" y="313" width="115" height="115"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             </view>
@@ -155,6 +155,11 @@
                                     </view>
                                 </subviews>
                             </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="H0N-N3-0Ck">
+                                <rect key="frame" x="279" y="571" width="76" height="76"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="floatbutton"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -162,6 +167,7 @@
                     <size key="freeformSize" width="375" height="667"/>
                     <connections>
                         <outlet property="contentView" destination="VN6-3Y-YmX" id="2u7-zg-VQF"/>
+                        <outlet property="floatingButton" destination="H0N-N3-0Ck" id="mrE-GI-8MB"/>
                         <outlet property="scrollView" destination="WLk-P1-BBZ" id="U1S-lY-2Il"/>
                         <outlet property="userIconView" destination="x5E-eN-2JH" id="BWV-61-VD9"/>
                         <outlet property="同じ出身地View" destination="5Cw-Uf-daF" id="Kj7-Yn-kK6"/>
@@ -177,6 +183,7 @@
     </scenes>
     <resources>
         <image name="bgimage_gradation" width="375" height="667"/>
+        <image name="floatbutton" width="76" height="76"/>
         <image name="icon_birthday" width="28" height="29"/>
         <image name="icon_green_pin" width="24" height="33"/>
         <image name="icon_green_skyblue" width="24" height="33"/>
