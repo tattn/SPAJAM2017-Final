@@ -94,11 +94,11 @@ final class BraveInfectionVC: UIViewController {
         func diffFromCenterForResults() -> CGPoint {
             switch self {
             case .up:
-                return CGPoint(x: 0, y: -335)
+                return CGPoint(x: 0, y: -300)
             case .right:
                 return CGPoint(x: 280, y: 0)
             case .down:
-                return CGPoint(x: 0, y: 335)
+                return CGPoint(x: 0, y: 280)
             case .left:
                 return CGPoint(x: -280, y: 0)
             case .none:
@@ -109,13 +109,13 @@ final class BraveInfectionVC: UIViewController {
         func margin(plus size: CGSize) -> CGPoint {
             switch self {
             case .up:
-                return CGPoint(x: 0, y: -30 - size.height)
+                return CGPoint(x: 0, y: -20 - size.height)
             case .right:
-                return CGPoint(x: 20 + size.width, y: 0)
+                return CGPoint(x: 10 + size.width, y: 0)
             case .down:
-                return CGPoint(x: 0, y: 20 + size.height)
+                return CGPoint(x: 0, y: 10 + size.height)
             case .left:
-                return CGPoint(x: -30 - size.width, y: 0)
+                return CGPoint(x: -20 - size.width, y: 0)
             case .none:
                 return .zero
             }
@@ -124,13 +124,13 @@ final class BraveInfectionVC: UIViewController {
         func marginLeft(plus size: CGSize) -> CGPoint {
             switch self {
             case .up:
-                return CGPoint(x: -(30 + size.height), y: (30 + size.height) / 2)
+                return CGPoint(x: -(10 + size.height), y: (10 + size.height) / 2)
             case .right:
-                return CGPoint(x: -(20 + size.width) / 2, y: -(20 + size.width))
+                return CGPoint(x: -(10 + size.width) / 2, y: -(10 + size.width))
             case .down:
-                return CGPoint(x: (20 + size.height), y: -(20 + size.height) / 2)
+                return CGPoint(x: (10 + size.height), y: -(10 + size.height) / 2)
             case .left:
-                return CGPoint(x: (30 + size.width) / 2, y: (30 + size.width))
+                return CGPoint(x: (20 + size.width) / 2, y: (20 + size.width))
             case .none:
                 return .zero
             }
@@ -139,13 +139,13 @@ final class BraveInfectionVC: UIViewController {
         func marginRight(plus size: CGSize) -> CGPoint {
             switch self {
             case .up:
-                return CGPoint(x: (30 + size.height), y: (30 + size.height) / 2)
+                return CGPoint(x: (20 + size.height), y: (20 + size.height) / 2)
             case .right:
-                return CGPoint(x: -(20 + size.width) / 2, y: (20 + size.width))
+                return CGPoint(x: -(10 + size.width) / 2, y: (10 + size.width))
             case .down:
-                return CGPoint(x: -(20 + size.height), y: -(20 + size.height) / 2)
+                return CGPoint(x: -(10 + size.height), y: -(10 + size.height) / 2)
             case .left:
-                return CGPoint(x: (30 + size.width) / 2, y: -(30 + size.width))
+                return CGPoint(x: (20 + size.width) / 2, y: -(20 + size.width))
             case .none:
                 return .zero
             }
@@ -210,12 +210,11 @@ final class BraveInfectionVC: UIViewController {
         func setup(view: UIView, direction: Direction = .none) {
             func setupResultButtons(center: CGPoint, direction: Direction = .none, number: Int = 4) {
                 func createButton(defaultPoint: CGPoint, buttonSize: CGSize) {
-                    let view = RoundedView(frame: CGRect(origin: defaultPoint, size: buttonSize))
-                    view.backgroundColor = .gray
+                    let view = UserIconView(frame: CGRect(origin: defaultPoint, size: buttonSize))
                     self.contentView.addSubview(view)
                 }
                 
-                let buttonSize = CGSize(width: 100.0, height: 100.0)
+                let buttonSize = CGSize(width: 115.0, height: 115.0)
                 var defaultPoint = CGPoint(x: center.x - buttonSize.width / 2 + direction.diffFromCenterForResults().x,
                                            y: center.y - buttonSize.height / 2 + direction.diffFromCenterForResults().y)
                 
