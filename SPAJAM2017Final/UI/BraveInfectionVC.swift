@@ -263,9 +263,11 @@ final class BraveInfectionVC: UIViewController {
             var defaultPoint = CGPoint(x: center.x - buttonSize.width / 2 + direction.diffFromCenterForResults().x,
                                        y: center.y - buttonSize.height / 2 + direction.diffFromCenterForResults().y)
             
-            createButton(defaultPoint: defaultPoint, buttonSize: buttonSize, friend: friends[0])
+            guard let friend = friends.first else { return }
+            createButton(defaultPoint: defaultPoint, buttonSize: buttonSize, friend: friend)
 
-            for i in 1 ..< limit {
+            let forLimit = limit > friends.count ? friends.count : limit
+            for i in 1 ..< forLimit - 1 {
                 if i % 3 == 0 {
                     createButton(defaultPoint: defaultPoint,
                                  buttonSize: buttonSize,
@@ -292,20 +294,31 @@ final class BraveInfectionVC: UIViewController {
                             size: view.frame.size)
         
         let friends = TopVC.friends!
-        // let me = TopVC.me!
+        let me = TopVC.me!
         
         switch direction {
         case .none:
             break
-        // ここでfilterをかける
         case .up:
-            setupResultButtons(center: point, direction: direction, friends: friends, limit: 10)
+            setupResultButtons(center: point,
+                               direction: direction,
+                               friends: friends,
+                               limit: 11) // 同じ高校
         case .down:
-            setupResultButtons(center: point, direction: direction, friends: friends, limit: 10)
+            setupResultButtons(center: point,
+                               direction: direction,
+                               friends: friends,
+                               limit: 11) // 同じ所在地→趣味
         case .right:
-            setupResultButtons(center: point, direction: direction, friends: friends, limit: 4)
+            setupResultButtons(center: point,
+                               direction: direction,
+                               friends: friends.filter { $0.hometownName == me.hometownName },
+                               limit: 5) // 同じ出身地
         case .left:
-            setupResultButtons(center: point, direction: direction, friends: friends, limit: 4)
+            setupResultButtons(center: point,
+                               direction: direction,
+                               friends: friends.filter { $0.birthday == me.birthday },
+                               limit: 5) // 同じ誕生日
         }
     }
 }
