@@ -77,7 +77,6 @@ final class BraveInfectionVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         TopVC.fetchFacebookData(view: self) {
             var tapGesture = UITapGestureRecognizer()
             self.floatingButton.addGestureRecognizer(tapGesture)
