@@ -67,6 +67,7 @@
 		24671AEE1F11487900EAF842 /* GraphAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24671AED1F11487900EAF842 /* GraphAPI.swift */; };
 		24671AF01F114A4C00EAF842 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24671AEF1F114A4C00EAF842 /* Login.swift */; };
 		24671AF21F116CDD00EAF842 /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24671AF11F116CDD00EAF842 /* Mock.swift */; };
+		24671AF41F11D63600EAF842 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24671AF31F11D63600EAF842 /* APIClient.swift */; };
 		247A9C7E1ED9B5E900D929FF /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247A9C7D1ED9B5E900D929FF /* Operator.swift */; };
 		247A9C801ED9BF3C00D929FF /* NotificationKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247A9C7F1ED9BF3C00D929FF /* NotificationKey.swift */; };
 		247A9CD21EDA051200D929FF /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247A9CD11EDA051200D929FF /* Errors.swift */; };
@@ -192,6 +193,7 @@
 		24671AED1F11487900EAF842 /* GraphAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphAPI.swift; sourceTree = "<group>"; };
 		24671AEF1F114A4C00EAF842 /* Login.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		24671AF11F116CDD00EAF842 /* Mock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mock.swift; sourceTree = "<group>"; };
+		24671AF31F11D63600EAF842 /* APIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		247A9C7D1ED9B5E900D929FF /* Operator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
 		247A9C7F1ED9BF3C00D929FF /* NotificationKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationKey.swift; sourceTree = "<group>"; };
 		247A9CD11EDA051200D929FF /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
@@ -471,6 +473,7 @@
 				24671AEC1F11486300EAF842 /* Facebook */,
 				247A9D311EDB12CB00D929FF /* HTTPClient */,
 				2419F2881D441703005917D2 /* FooModel.swift */,
+				24671AF31F11D63600EAF842 /* APIClient.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -705,6 +708,7 @@
 				24FD0C4A1D5F34DF0031B6F0 /* ProgressHUD.swift in Sources */,
 				24C450041ED75D1B009B6B8C /* UserDefaultsKey.swift in Sources */,
 				24671AF01F114A4C00EAF842 /* Login.swift in Sources */,
+				24671AF41F11D63600EAF842 /* APIClient.swift in Sources */,
 				24410D6B1D2427A9008B0A97 /* AppDelegate.swift in Sources */,
 				243F948B1D25852500C302D0 /* CoreFunctionExtension.swift in Sources */,
 				24671AF21F116CDD00EAF842 /* Mock.swift in Sources */,

@@ -56,21 +56,23 @@ final class TopVC: UIViewController, StoryboardInstantiatable {
         super.viewDidAppear(animated)
     }
     
-    func registerPhotos(userId: String = "101761067145209") {
-        GraphAPI.photos(userId: userId) { result in
-            let imageUrls = result.value ?? []
-            let data = imageUrls.joined(separator: ",")
-            Alamofire.request("http://52.243.33.233:80/registUser",
-                              method: .post,
-                              parameters: ["userId": userId,
-                                           "userData": data,
-                                           "endFlag": "0"], encoding: JSONEncoding.default).response { response in
-                                            print(response)
-            }
-        }
-    }
-
     @IBAction func tapLoginButton(_ sender: Any) {
+//        Login.login(from: self) { 
+////        APIClient.registerPhotos(userId: "101761067145209")
+//        APIClient.getTags(userId: "101761067145209")
+//        }
+//        
+//        return
+        //Login.login(from: self) {
+         //   GraphAPI.me { _ in
+//                GraphAPI.friends { _ in
+//                    GraphAPI.profile(userId: "747789068725242") { _ in
+//                        GraphAPI.feed(userId: "747789068725242") { _ in
+//                            GraphAPI.photos(userId: "101761067145209") { _ in
+//                            }
+//                        }
+//                    }
+//                }
         TopVC.fetchFacebookData(view: self, completion: nil)
     }
     
