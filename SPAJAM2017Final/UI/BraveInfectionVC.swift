@@ -61,18 +61,6 @@ final class BraveInfectionVC: UIViewController {
         return .identifier(className)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-
-        let screenSize = UIScreen.main.bounds.size
-        let center = CGPoint(x: screenSize.width * 3 / 2, y: screenSize.height * 3 / 2)
-
-        self.setupScrollView(to: center, screenSize: screenSize)
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-        self.isCenter = true
-    }
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         ProgressHUD.show(title: "Facebookからデータを\n読み込んでいます", ignoreInteraction: true)
@@ -96,6 +84,8 @@ final class BraveInfectionVC: UIViewController {
             }
         }).disposed(by: self.disposeBag)
         
+        addSwipeGesture()
+        
         TopVC.fetchFacebookData(view: self) {
             self.userIconView.setup(userName: TopVC.me!.name, userDescription: "これはあなたです", imageURL: URL(string: TopVC.me!.iconUrl)!)
             
@@ -107,6 +97,66 @@ final class BraveInfectionVC: UIViewController {
 
             ProgressHUD.dismiss()
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        let screenSize = UIScreen.main.bounds.size
+        let center = CGPoint(x: screenSize.width * 3 / 2, y: screenSize.height * 3 / 2)
+        
+        self.setupScrollView(to: center, screenSize: screenSize)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.isCenter = true
+    }
+    
+    private func addSwipeGesture() {
+        let swipeRightRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(didSwipe(sender:)))
+        swipeRightRecognizer.direction = .right
+        scrollView.addGestureRecognizer(swipeRightRecognizer)
+        let swipeLeftRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(didSwipe(sender:)))
+        swipeLeftRecognizer.direction = .left
+        scrollView.addGestureRecognizer(swipeLeftRecognizer)
+        let swipeUpRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(didSwipe(sender:)))
+        swipeUpRecognizer.direction = .up
+        scrollView.addGestureRecognizer(swipeUpRecognizer)
+        let swipeDownRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(didSwipe(sender:)))
+        swipeDownRecognizer.direction = .down
+        scrollView.addGestureRecognizer(swipeDownRecognizer)
+    }
+    
+    final func didSwipe(sender: UISwipeGestureRecognizer) {
+        let screenSize = UIScreen.main.bounds.size
+        let center = CGPoint(x: screenSize.width * 3 / 2, y: screenSize.height * 3 / 2)
+        
+        guard self.isCenter else {
+            self.scrollView.setContentOffset(CGPoint(x: center.x - screenSize.width * 3 / 2,
+                                                     y: center.y - screenSize.height / 2),
+                                             animated: true)
+            self.isCenter = true
+            return
+        }
+
+        if sender.direction.contains(.left) {
+            self.scrollView.setContentOffset(CGPoint(x: center.x - screenSize.width * 3 / 2 + screenSize.width - 100,
+                                                     y: center.y - screenSize.height / 2),
+                                             animated: true)
+        } else if sender.direction.contains(.up) {
+            self.scrollView.setContentOffset(CGPoint(x: center.x - screenSize.width * 3 / 2,
+                                                     y: center.y - screenSize.height / 2 + screenSize.height - 275),
+                                             animated: true)
+        } else if sender.direction.contains(.down) {
+            self.scrollView.setContentOffset(CGPoint(x: center.x - screenSize.width * 3 / 2,
+                                                     y: 200),
+                                             animated: true)
+        } else if sender.direction.contains(.right) {
+            self.scrollView.setContentOffset(CGPoint(x: center.x - screenSize.width * 3 / 2 - screenSize.width + 100,
+                                                     y: center.y - screenSize.height / 2),
+                                             animated: true)
+
+        }
+
+        isCenter = false
     }
     
     private enum Direction {
@@ -211,52 +261,52 @@ final class BraveInfectionVC: UIViewController {
                         )}
         )
     }
+
+    private func addGesture(to view: UIView, goto direction: Direction, center: CGPoint, screenSize: CGSize) {
+        var tapGesture = UITapGestureRecognizer()
+        
+        view.addGestureRecognizer(tapGesture)
+        tapGesture.rx.event.subscribe(onNext: { _ in
+            self.scaleAnimateView(view: view)
+            
+            guard self.isCenter else {
+                self.scrollView.setContentOffset(CGPoint(x: center.x - screenSize.width * 3 / 2,
+                                                         y: center.y - screenSize.height / 2),
+                                                 animated: true)
+                self.isCenter = true
+                return
+            }
+            
+            switch direction {
+            case .up:
+                self.scrollView.setContentOffset(CGPoint(x: center.x - screenSize.width * 3 / 2,
+                                                         y: 200),
+                                                 animated: true)
+            case .right:
+                self.scrollView.setContentOffset(CGPoint(x: center.x - screenSize.width * 3 / 2 + screenSize.width - 100,
+                                                         y: center.y - screenSize.height / 2),
+                                                 animated: true)
+            case .down:
+                self.scrollView.setContentOffset(CGPoint(x: center.x - screenSize.width * 3 / 2,
+                                                         y: center.y - screenSize.height / 2 + screenSize.height - 275),
+                                                 animated: true)
+            case .left:
+                self.scrollView.setContentOffset(CGPoint(x: center.x - screenSize.width * 3 / 2 - screenSize.width + 100,
+                                                         y: center.y - screenSize.height / 2),
+                                                 animated: true)
+            case .none:
+                print("fuck you")
+            }
+            self.isCenter = false
+        })
+            .disposed(by: disposeBag)
+    }
     
     private func setupRoundedViews(center: CGPoint, screenSize: CGSize) {
-        func addGesture(to view: UIView, goto direction: Direction) {
-            var tapGesture = UITapGestureRecognizer()
-
-            view.addGestureRecognizer(tapGesture)
-            tapGesture.rx.event.subscribe(onNext: { _ in
-                self.scaleAnimateView(view: view)
-                
-                guard self.isCenter else {
-                    self.scrollView.setContentOffset(CGPoint(x: center.x - screenSize.width * 3 / 2,
-                                                             y: center.y - screenSize.height / 2),
-                                                     animated: true)
-                    self.isCenter = true
-                    return
-                }
-                
-                switch direction {
-                case .up:
-                    self.scrollView.setContentOffset(CGPoint(x: center.x - screenSize.width * 3 / 2,
-                                                             y: 200),
-                                                     animated: true)
-                case .right:
-                    self.scrollView.setContentOffset(CGPoint(x: center.x - screenSize.width * 3 / 2 + screenSize.width - 100,
-                                                             y: center.y - screenSize.height / 2),
-                                                     animated: true)
-                case .down:
-                    self.scrollView.setContentOffset(CGPoint(x: center.x - screenSize.width * 3 / 2,
-                                                             y: center.y - screenSize.height / 2 + screenSize.height - 275),
-                                                     animated: true)
-                case .left:
-                    self.scrollView.setContentOffset(CGPoint(x: center.x - screenSize.width * 3 / 2 - screenSize.width + 100,
-                                                             y: center.y - screenSize.height / 2),
-                                                     animated: true)
-                case .none:
-                    print("fuck you")
-                }
-                self.isCenter = false
-            })
-            .disposed(by: disposeBag)
-        }
-        
-        addGesture(to: 同じ高校View, goto: .up)
-        addGesture(to: 同じ誕生日View, goto: .left)
-        addGesture(to: 同じ出身地View, goto: .right)
-        addGesture(to: 同じ所在地View, goto: .down)
+        addGesture(to: 同じ高校View, goto: .up, center: center, screenSize: screenSize)
+        addGesture(to: 同じ誕生日View, goto: .left, center: center, screenSize: screenSize)
+        addGesture(to: 同じ出身地View, goto: .right, center: center, screenSize: screenSize)
+        addGesture(to: 同じ所在地View, goto: .down, center: center, screenSize: screenSize)
     }
     
     private func setupScrollView(to point: CGPoint, screenSize: CGSize) {
