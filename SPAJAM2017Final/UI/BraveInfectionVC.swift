@@ -255,7 +255,7 @@ final class BraveInfectionVC: UIViewController {
             func createButton(defaultPoint: CGPoint, buttonSize: CGSize, friend: GraphMe) {
                 let view = UserIconView(frame: CGRect(origin: defaultPoint, size: buttonSize))
                 view.setup(userName: friend.name,
-                           userDescription: friend.works[0].employerName,
+                           userDescription: friend.works.first?.employerName ?? "",
                            imageURL: URL(string: friend.iconUrl)!)
                 self.contentView.addSubview(view)
             }
