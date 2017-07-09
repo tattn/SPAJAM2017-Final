@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import FBSDKLoginKit
 import Result
+import RxSwift
 
 struct GraphMe {
     let gender: String
@@ -62,8 +63,8 @@ final class GraphAPI {
             
             if let result = result as? [String: Any] {
                 let graphMe = GraphMe(gender: result["gender"] as! String,
-                                      locationName: (result["location"] as! [String: Any])["name"] as! String,
-                                      works: (result["work"] as! [[String: Any]]).map {
+                                      locationName: (result["location"] as? [String: Any])?["name"] as? String ?? "",
+                                      works: ((result["work"] as? [[String: Any]]) ?? []).map {
                                         GraphMe.Work.init(employerName: ($0["employer"] as! [String: Any])["name"] as! String,
                                                           startDate: $0["start_date"] as? String ?? "",
                                                           id: $0["id"] as! String,
@@ -71,10 +72,10 @@ final class GraphAPI {
                                                           positionName: ($0["position"] as? [String: Any] ?? [:])["name"] as? String ?? "")
                     },
                                       id: result["id"] as! String,
-                                      birthday: result["birthday"] as! String,
-                                      hometownName: (result["hometown"] as? [String: Any] ?? [:])["name"] as? String ?? "",
+                                      birthday: result["birthday"] as? String ?? "",
+                                      hometownName: (result["hometown"] as? [String: Any])?["name"] as? String ?? "",
                                       name: result["name"] as! String,
-                                      iconUrl: ((result["picture"] as! [String: Any])["data"] as! [String: Any])["url"] as! String)
+                                      iconUrl: ((result["picture"] as? [String: Any])?["data"] as? [String: Any])?["url"] as? String ?? "")
                 print(graphMe)
                 completion(.success(graphMe))
             }
@@ -222,10 +223,10 @@ final class GraphAPI {
         })
     }
     
-    static func photos(userId: String, completion: @escaping (Result<[Feed], NSError>) -> Void) {
+    static func photos0(userId: String, completion: @escaping (Result<[Feed], NSError>) -> Void) {
         guard FBSDKAccessToken.current() != nil else { return }
         
-        let params: [String: String] = ["fields": "url", "locale": "ja_JP", "limit": "\(100)"]
+        let params: [String: String] = ["fields": "link", "locale": "ja_JP", "limit": "\(100)"]
         let request = FBSDKGraphRequest(graphPath: "/\(userId)/photos", parameters: params)
         _ = request?.start(completionHandler: { (_, result, error) -> Void in
             
@@ -236,25 +237,56 @@ final class GraphAPI {
             
             guard let result = result as? [String: Any] else { return }
             
-            // ページングやりたい
-            // result["paging"]になんかはいってる
-            let feeds = (result["data"] as! [[String: Any]]).map {
-                Feed(message: $0["message"] as? String,
-                     id: $0["id"] as? String,
-                     caption: $0["caption"] as? String,
-                     description: $0["description"] as? String,
-                     icon: $0["icon"] as? String,
-                     link: $0["link"] as? String,
-                     name: $0["name"] as? String,
-                     shares: $0["shares"] as? String,
-                     message_tags: $0["message_tags"] as Any,
-                     objectType: $0["object_type"] as? String,
-                     objectId: $0["object_id"] as? String
-                )
+//            let albumIds = (result["data"] as? [[String: Any]] ?? []).flatMap { $0["id"] as? String }
+            //            completion(.success(feeds))
+        })
+    }
+    
+    static func photos(userId: String, completion: @escaping (Result<[String], NSError>) -> Void) {
+        guard FBSDKAccessToken.current() != nil else { return }
+        
+        let params: [String: String] = ["fields": "id", "locale": "ja_JP", "limit": "\(100)"]
+        let request = FBSDKGraphRequest(graphPath: "/\(userId)/albums", parameters: params)
+        _ = request?.start(completionHandler: { (_, result, error) -> Void in
+            
+            if let error = error {
+                print("graph friends: \(error)")
+                return
             }
             
-            print(feeds)
-            completion(.success(feeds))
+            guard let result = result as? [String: Any] else { return }
+        
+            var imageUrls: [String] = []
+            let group = DispatchGroup()
+            let albumIds = (result["data"] as? [[String: Any]] ?? []).flatMap { $0["id"] as? String }
+            
+            for albumId in albumIds {
+                group.enter()
+                DispatchQueue.global().async {
+                    let params: [String: String] = ["fields": "link,picture,images", "locale": "ja_JP", "limit": "\(100)"]
+                    let request = FBSDKGraphRequest(graphPath: "/\(albumId)/photos", parameters: params)
+                    _ = request?.start(completionHandler: { (_, result, error) -> Void in
+                        
+                        if let error = error {
+                            print("graph friends: \(error)")
+                            return
+                        }
+                        
+                        guard let result = result as? [String: Any] else { return }
+                        
+                        if let imageUrl = ((result["data"] as? [[String: Any]] ?? [])[0]["images"] as? [[String: Any]] ?? [])[0]["source"] as? String {
+                            imageUrls.append(imageUrl)
+                        }
+                        group.leave()
+                    })
+                }
+            }
+            
+            group.notify(queue: .main) {
+                print(imageUrls)
+                completion(.success(imageUrls))
+            }
         })
+        
     }
 }
