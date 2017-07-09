@@ -81,6 +81,7 @@ final class BraveInfectionVC: UIViewController {
             var tapGesture = UITapGestureRecognizer()
             self.floatingButton.addGestureRecognizer(tapGesture)
             tapGesture.rx.event.subscribe(onNext: { _ in
+                self.scaleAnimateView(view: self.floatingButton)
                 self.navigationController?.setNavigationBarHidden(false, animated: false)
                 self.navigationController?.pushViewController(EpisodeVC.instantiate(with: .init(title: "エピソードを投稿する")), animated: true)
             }).disposed(by: self.disposeBag)
@@ -88,6 +89,7 @@ final class BraveInfectionVC: UIViewController {
             tapGesture = UITapGestureRecognizer()
             self.userIconView.addGestureRecognizer(tapGesture)
             tapGesture.rx.event.subscribe(onNext: { _ in
+                self.scaleAnimateView(view: self.userIconView)
                 self.navigationController?.setNavigationBarHidden(false, animated: false)
                 self.navigationController?.pushViewController(MyEpisodeVC.instantiate(with: .init(title: "あなた のエピソード")), animated: true)
             }).disposed(by: self.disposeBag)
@@ -187,12 +189,32 @@ final class BraveInfectionVC: UIViewController {
         }
     }
     
+    func scaleAnimateView(view: UIView) {
+        UIView.animate(withDuration: 0.0,
+                       delay: 0.0,
+                       options: .curveEaseIn,
+                       animations: {
+                        view.transform = view.transform.scaledBy(x: 1.1, y: 1.1)
+        },
+                       completion: {_ in
+                        UIView.animate(withDuration: 0.0,
+                                       delay: 0.0,
+                                       options: .curveEaseIn,
+                                       animations: {
+                                        view.transform = view.transform.scaledBy(x: 0.9, y: 0.9)
+                        }, completion: {_ in}
+                        )}
+        )
+    }
+    
     private func setupRoundedViews(center: CGPoint, screenSize: CGSize) {
         func addGesture(to view: UIView, goto direction: Direction) {
             var tapGesture = UITapGestureRecognizer()
 
             view.addGestureRecognizer(tapGesture)
             tapGesture.rx.event.subscribe(onNext: { _ in
+                self.scaleAnimateView(view: view)
+                
                 guard self.isCenter else {
                     self.scrollView.setContentOffset(CGPoint(x: center.x - screenSize.width * 3 / 2,
                                                              y: center.y - screenSize.height / 2),
@@ -266,6 +288,8 @@ final class BraveInfectionVC: UIViewController {
             guard let friend = friends.first else { return }
             createButton(defaultPoint: defaultPoint, buttonSize: buttonSize, friend: friend)
 
+            guard friends.count > 1 else { return }
+            
             let forLimit = limit > friends.count ? friends.count : limit
             for i in 1 ..< forLimit - 1 {
                 if i % 3 == 0 {
