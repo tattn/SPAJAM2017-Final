@@ -13,9 +13,8 @@ import RxSwift
 import RxCocoa
 import Alamofire
 
-
 final class TopVC: UIViewController, StoryboardInstantiatable {
-    static var me: GraphMe? = nil
+    static var me: GraphMe?
     static var friends: [GraphMe]? = []
     
     @IBOutlet private weak var label: UILabel!
@@ -94,6 +93,15 @@ final class TopVC: UIViewController, StoryboardInstantiatable {
                         break
                     }
                     completion?()
+                    
+                    // ちょっと失礼しますね★
+//                    if let id = TopVC.me?.id {
+//                        GraphAPI.photos(userId: id) { _ in
+//                            APIClient.getTags { tags in
+//                                print(tags)
+//                            }
+//                        }
+//                    }
                     /*
                      GraphAPI.profile(userId: "747789068725242") { _ in
                      GraphAPI.feed(userId: "747789068725242") { _ in

@@ -10,12 +10,13 @@ import Foundation
 import Alamofire
 
 struct APIClient {
-    static func getTags(userId: String = "101761067145209") {
+    static func getTags(userId: String = "101761067145209", completion: @escaping ([String]) -> Void) {
         Alamofire.request("http://52.243.33.233:80/getUserTags/" + userId,
                           method: .get,
                           parameters: nil,
-                          encoding: JSONEncoding.default).response { response in
-            print(response)
+                          encoding: JSONEncoding.default).responseJSON { response in
+                            guard let value = response.result.value as? [String: Any] else { completion([]); return }
+                            completion((value["data"] as? [String: Any] ?? [:])?["UserTags"] as? [String] ?? [])
         }
     }
     
