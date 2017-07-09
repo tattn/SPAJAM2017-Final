@@ -61,22 +61,48 @@ final class BraveInfectionVC: UIViewController {
         return .identifier(className)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+
+
+        ProgressHUD.show(title: "Facebookからデータを\n読み込んでいます", ignoreInteraction: true)
+
+        let screenSize = UIScreen.main.bounds.size
+        let center = CGPoint(x: screenSize.width * 3 / 2, y: screenSize.height * 3 / 2)
+
+        self.setupScrollView(to: center, screenSize: screenSize)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var tapGesture = UITapGestureRecognizer()
-        floatingButton.addGestureRecognizer(tapGesture)
-        tapGesture.rx.event.subscribe(onNext: { _ in
-            self.navigationController?.setNavigationBarHidden(false, animated: false)
-            self.navigationController?.pushViewController(MyEpisodeVC.instantiate(with: .init(title: "あなたたた のエピソード")), animated: true)
-        })
-            .disposed(by: disposeBag)
         
-        let screenSize = UIScreen.main.bounds.size
-        let center = CGPoint(x: screenSize.width * 3 / 2, y: screenSize.height * 3 / 2)
-        setupRoundedViews(center: center, screenSize: screenSize)
-        setupScrollView(to: center, screenSize: screenSize)
-        setupViewsLocation(to: center)
+        TopVC.fetchFacebookData(view: self) {
+            var tapGesture = UITapGestureRecognizer()
+            self.floatingButton.addGestureRecognizer(tapGesture)
+            tapGesture.rx.event.subscribe(onNext: { _ in
+                self.navigationController?.setNavigationBarHidden(false, animated: false)
+                self.navigationController?.pushViewController(EpisodeVC.instantiate(with: .init(title: "エピソードを投稿する")), animated: true)
+            }).disposed(by: self.disposeBag)
+            
+            tapGesture = UITapGestureRecognizer()
+            self.userIconView.addGestureRecognizer(tapGesture)
+            tapGesture.rx.event.subscribe(onNext: { _ in
+                self.navigationController?.setNavigationBarHidden(false, animated: false)
+                self.navigationController?.pushViewController(MyEpisodeVC.instantiate(with: .init(title: "あなた のエピソード")), animated: true)
+            }).disposed(by: self.disposeBag)
+            
+            self.userIconView.setup(userName: TopVC.me!.name, userDescription: "これはあなたです", imageURL: URL(string: TopVC.me!.iconUrl)!)
+            
+            let screenSize = UIScreen.main.bounds.size
+            let center = CGPoint(x: screenSize.width * 3 / 2, y: screenSize.height * 3 / 2)
+            
+            self.setupRoundedViews(center: center, screenSize: screenSize)
+            self.setupViewsLocation(to: center)
+
+            ProgressHUD.dismiss()
+        }
     }
     
     private enum Direction {
@@ -217,56 +243,71 @@ final class BraveInfectionVC: UIViewController {
     }
     
     private func setupViewsLocation(to point: CGPoint) {
-        func setup(view: UIView, direction: Direction = .none) {
-            func setupResultButtons(center: CGPoint, direction: Direction = .none, number: Int = 4) {
-                func createButton(defaultPoint: CGPoint, buttonSize: CGSize) {
-                    let view = UserIconView(frame: CGRect(origin: defaultPoint, size: buttonSize))
-                    self.contentView.addSubview(view)
-                }
-                
-                let buttonSize = CGSize(width: 115.0, height: 115.0)
-                var defaultPoint = CGPoint(x: center.x - buttonSize.width / 2 + direction.diffFromCenterForResults().x,
-                                           y: center.y - buttonSize.height / 2 + direction.diffFromCenterForResults().y)
-                
-                createButton(defaultPoint: defaultPoint, buttonSize: buttonSize)
-                
-                for i in 0 ..< number - 1 {
-                    if i % 3 == 0 {
-                        defaultPoint = CGPoint(x: defaultPoint.x + direction.margin(plus: buttonSize).x,
-                                               y: defaultPoint.y + direction.margin(plus: buttonSize).y)
-                        createButton(defaultPoint: defaultPoint, buttonSize: buttonSize)
-                    } else if i % 3 == 1 {
-                        createButton(defaultPoint: CGPoint(x: defaultPoint.x + direction.marginLeft(plus: buttonSize).x,
-                                                           y: defaultPoint.y + direction.marginLeft(plus: buttonSize).y),
-                                     buttonSize: buttonSize)
-                    } else {
-                        createButton(defaultPoint: CGPoint(x: defaultPoint.x + direction.marginRight(plus: buttonSize).x,
-                                                           y: defaultPoint.y + direction.marginRight(plus: buttonSize).y),
-                                     buttonSize: buttonSize)
-                    }
-                
-                }
+        setup(view: userIconView, point: point)
+        setup(view: 同じ高校View, point: point, direction: .up)
+        setup(view: 同じ誕生日View, point: point, direction: .left)
+        setup(view: 同じ出身地View, point: point, direction: .right)
+        setup(view: 同じ所在地View, point: point, direction: .down)
+    }
+    
+    private func setup(view: UIView, point: CGPoint, direction: Direction = .none) {
+        func setupResultButtons(center: CGPoint, direction: Direction = .none, friends: [GraphMe], limit: Int) {
+            func createButton(defaultPoint: CGPoint, buttonSize: CGSize, friend: GraphMe) {
+                let view = UserIconView(frame: CGRect(origin: defaultPoint, size: buttonSize))
+                view.setup(userName: friend.name,
+                           userDescription: friend.works[0].employerName,
+                           imageURL: URL(string: friend.iconUrl)!)
+                self.contentView.addSubview(view)
             }
-
-            view.frame = CGRect(origin: CGPoint(x: point.x - view.frame.size.width / 2 + direction.diffFromCenter().x,
-                                                y: point.y - view.frame.size.height / 2 + direction.diffFromCenter().y),
-                                        size: view.frame.size)
             
-            switch direction {
-            case .none:
-                break
-            case .up, .down:
-                setupResultButtons(center: point, direction: direction, number: 10)
-            case .right, .left:
-                setupResultButtons(center: point, direction: direction, number: 4)
+            let buttonSize = CGSize(width: 115.0, height: 115.0)
+            var defaultPoint = CGPoint(x: center.x - buttonSize.width / 2 + direction.diffFromCenterForResults().x,
+                                       y: center.y - buttonSize.height / 2 + direction.diffFromCenterForResults().y)
+            
+            createButton(defaultPoint: defaultPoint, buttonSize: buttonSize, friend: friends[0])
+
+            for i in 1 ..< limit {
+                if i % 3 == 0 {
+                    createButton(defaultPoint: defaultPoint,
+                                 buttonSize: buttonSize,
+                                 friend: friends[i])
+                } else if i % 3 == 1 {
+                    defaultPoint = CGPoint(x: defaultPoint.x + direction.margin(plus: buttonSize).x,
+                                           y: defaultPoint.y + direction.margin(plus: buttonSize).y)
+
+                    createButton(defaultPoint: CGPoint(x: defaultPoint.x + direction.marginLeft(plus: buttonSize).x,
+                                                       y: defaultPoint.y + direction.marginLeft(plus: buttonSize).y),
+                                 buttonSize: buttonSize,
+                                 friend: friends[i])
+                } else {
+                    createButton(defaultPoint: CGPoint(x: defaultPoint.x + direction.marginRight(plus: buttonSize).x,
+                                                       y: defaultPoint.y + direction.marginRight(plus: buttonSize).y),
+                                 buttonSize: buttonSize,
+                                 friend: friends[i])
+                }
             }
         }
         
-        setup(view: userIconView)
-        setup(view: 同じ高校View, direction: .up)
-        setup(view: 同じ誕生日View, direction: .left)
-        setup(view: 同じ出身地View, direction: .right)
-        setup(view: 同じ所在地View, direction: .down)
+        view.frame = CGRect(origin: CGPoint(x: point.x - view.frame.size.width / 2 + direction.diffFromCenter().x,
+                                            y: point.y - view.frame.size.height / 2 + direction.diffFromCenter().y),
+                            size: view.frame.size)
+        
+        let friends = TopVC.friends!
+        // let me = TopVC.me!
+        
+        switch direction {
+        case .none:
+            break
+        // ここでfilterをかける
+        case .up:
+            setupResultButtons(center: point, direction: direction, friends: friends, limit: 10)
+        case .down:
+            setupResultButtons(center: point, direction: direction, friends: friends, limit: 10)
+        case .right:
+            setupResultButtons(center: point, direction: direction, friends: friends, limit: 4)
+        case .left:
+            setupResultButtons(center: point, direction: direction, friends: friends, limit: 4)
+        }
     }
 }
 

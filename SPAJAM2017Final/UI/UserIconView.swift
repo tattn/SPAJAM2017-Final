@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class UserIconView: RoundedView {
     @IBOutlet private weak var userImage: UIImageView!
@@ -26,9 +27,10 @@ class UserIconView: RoundedView {
         loadFromNib()
     }
     
-    func convertSmall() {
-        userName.font.withSize(10.0) // default: 18
-        userDescription.font.withSize(8.0) // default: 10
+    func setup(userName: String, userDescription: String, imageURL: URL) {
+        self.userName.text = userName
+        self.userDescription.text = userDescription
+        self.userImage.kf.setImage(with: imageURL)
     }
     
     private func loadFromNib() {

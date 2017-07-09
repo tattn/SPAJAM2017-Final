@@ -13,7 +13,10 @@ import RxSwift
 import RxCocoa
 import Alamofire
 
+
 final class TopVC: UIViewController, StoryboardInstantiatable {
+    static var me: GraphMe? = nil
+    static var friends: [GraphMe]? = []
     
     @IBOutlet private weak var label: UILabel!
     @IBOutlet private weak var label2: UILabel!
@@ -34,8 +37,10 @@ final class TopVC: UIViewController, StoryboardInstantiatable {
         var tapGesture = UITapGestureRecognizer()
         label.addGestureRecognizer(tapGesture)
         tapGesture.rx.event.subscribe(onNext: { _ in
-            self.navigationController?.setNavigationBarHidden(true, animated: false)
-            self.navigationController?.pushViewController(BraveInfectionVC.instantiate(with: .init(title: "🐱")), animated: true)
+            TopVC.fetchFacebookData(view: self) {
+                self.navigationController?.setNavigationBarHidden(true, animated: false)
+                self.navigationController?.pushViewController(BraveInfectionVC.instantiate(with: .init(title: "")), animated: true)
+            }
         })
         .disposed(by: disposeBag)
         
@@ -58,8 +63,8 @@ final class TopVC: UIViewController, StoryboardInstantiatable {
 //        }
 //        
 //        return
-        Login.login(from: self) {
-            GraphAPI.me { _ in
+        //Login.login(from: self) {
+         //   GraphAPI.me { _ in
 //                GraphAPI.friends { _ in
 //                    GraphAPI.profile(userId: "747789068725242") { _ in
 //                        GraphAPI.feed(userId: "747789068725242") { _ in
@@ -68,6 +73,36 @@ final class TopVC: UIViewController, StoryboardInstantiatable {
 //                        }
 //                    }
 //                }
+        TopVC.fetchFacebookData(view: self, completion: nil)
+    }
+    
+    class func fetchFacebookData(view: UIViewController, completion: (() -> Void)?) {
+        Login.login(from: view) {
+            GraphAPI.me { meResult in
+                switch meResult {
+                case .success(let me):
+                    TopVC.me = me
+                case .failure(_):
+                    break
+                }
+                
+                GraphAPI.friends { friendsResult in
+                    switch friendsResult {
+                    case .success(let friends):
+                        TopVC.friends = friends
+                    case .failure(_):
+                        break
+                    }
+                    completion?()
+                    /*
+                     GraphAPI.profile(userId: "747789068725242") { _ in
+                     GraphAPI.feed(userId: "747789068725242") { _ in
+                     GraphAPI.photos(userId: "747789068725242") { _ in
+                     }
+                     
+                     }
+                     }*/
+                }
             }
         }
     }

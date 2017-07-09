@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--EpisodeVC-->
+        <scene sceneID="iFw-Gy-Ttn">
+            <objects>
+                <viewController storyboardIdentifier="EpisodeVC" id="YA2-Er-VMO" customClass="EpisodeVC" customModule="SPAJAM2017Final" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="byQ-jK-cEr"/>
+                        <viewControllerLayoutGuide type="bottom" id="Jkr-eF-yIz"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="CF2-an-Bcb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_image_big" translatesAutoresizingMaskIntoConstraints="NO" id="Gb7-bc-jDu">
+                                <rect key="frame" x="0.0" y="20" width="375" height="190"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="190" id="9qS-zY-8iu"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="エンジニア" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dVG-uT-jDE">
+                                <rect key="frame" x="16" y="230" width="71.5" height="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                <color key="textColor" red="0.37254901959999998" green="0.37254901959999998" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2nc-KP-b6P">
+                                <rect key="frame" x="16" y="257" width="343" height="1"/>
+                                <color key="backgroundColor" red="0.90588235289999997" green="0.90588235289999997" blue="0.90588235289999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="ihN-V9-dlv"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="勇気を出したエピソード：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SAr-hu-ncT">
+                                <rect key="frame" x="16" y="278" width="343" height="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                <color key="textColor" red="0.37254901959999998" green="0.37254901959999998" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="こんな風に勇気を出して、その結果今こうだよ。ほげほげほげ。ほげほげほげ。ほげほげほげ。ほげほげほげ。ほげほげほげ。ほげほげほげ。ほげほげほげ。ほげほげほげ。ほげほげほげ。ほげほげほげ。ほげほげほげ。ほげほげほげ。" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="none" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="K2B-q7-9Nf">
+                                <rect key="frame" x="16" y="305" width="343" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.37254901959999998" green="0.37254901959999998" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="同じ誕生日" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eah-YJ-g24">
+                                <rect key="frame" x="287.5" y="230" width="71.5" height="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                <color key="textColor" red="0.37254901959999998" green="0.37254901959999998" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_birthday" translatesAutoresizingMaskIntoConstraints="NO" id="xFB-2O-YSx">
+                                <rect key="frame" x="259.5" y="228" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="911-9s-h7U"/>
+                                    <constraint firstAttribute="height" constant="20" id="NwJ-uf-VSC"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AjB-rD-Wqs" customClass="IBDesignableButton" customModule="SPAJAM2017Final" customModuleProvider="target">
+                                <rect key="frame" x="16" y="342" width="343" height="40"/>
+                                <color key="backgroundColor" red="0.0" green="0.77647058823529413" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="9nT-MT-rbg"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <state key="normal" title="このエピソードにいいね！する">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="2nc-KP-b6P" firstAttribute="leading" secondItem="CF2-an-Bcb" secondAttribute="leadingMargin" id="1cg-iP-ZeF"/>
+                            <constraint firstItem="AjB-rD-Wqs" firstAttribute="leading" secondItem="CF2-an-Bcb" secondAttribute="leadingMargin" id="4Et-SS-gfe"/>
+                            <constraint firstItem="Gb7-bc-jDu" firstAttribute="top" secondItem="byQ-jK-cEr" secondAttribute="bottom" id="ABI-0C-9xD"/>
+                            <constraint firstAttribute="trailing" secondItem="K2B-q7-9Nf" secondAttribute="trailing" constant="16" id="C5K-PX-8Lc"/>
+                            <constraint firstItem="Gb7-bc-jDu" firstAttribute="leading" secondItem="CF2-an-Bcb" secondAttribute="leadingMargin" constant="-16" id="Ciw-gt-LqH"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="2nc-KP-b6P" secondAttribute="trailing" id="FiI-i2-Kd8"/>
+                            <constraint firstItem="AjB-rD-Wqs" firstAttribute="top" secondItem="K2B-q7-9Nf" secondAttribute="bottom" constant="20" id="Fzn-zd-sLv"/>
+                            <constraint firstItem="Gb7-bc-jDu" firstAttribute="trailing" secondItem="CF2-an-Bcb" secondAttribute="trailingMargin" constant="16" id="Izv-Xa-j0Z"/>
+                            <constraint firstItem="SAr-hu-ncT" firstAttribute="leading" secondItem="CF2-an-Bcb" secondAttribute="leadingMargin" id="KxQ-zZ-ce7"/>
+                            <constraint firstItem="K2B-q7-9Nf" firstAttribute="top" secondItem="SAr-hu-ncT" secondAttribute="bottom" constant="10" id="Mla-0g-tAa"/>
+                            <constraint firstItem="2nc-KP-b6P" firstAttribute="top" secondItem="dVG-uT-jDE" secondAttribute="bottom" constant="10" id="Plo-ST-ur9"/>
+                            <constraint firstItem="xFB-2O-YSx" firstAttribute="top" secondItem="Gb7-bc-jDu" secondAttribute="bottom" constant="18" id="Pu0-V9-iRO"/>
+                            <constraint firstItem="eah-YJ-g24" firstAttribute="leading" secondItem="xFB-2O-YSx" secondAttribute="trailing" constant="8" id="Vn4-yi-m1Y"/>
+                            <constraint firstItem="dVG-uT-jDE" firstAttribute="leading" secondItem="CF2-an-Bcb" secondAttribute="leadingMargin" id="WeD-mf-edT"/>
+                            <constraint firstItem="eah-YJ-g24" firstAttribute="top" secondItem="Gb7-bc-jDu" secondAttribute="bottom" constant="20" id="Xa5-bW-7FQ"/>
+                            <constraint firstItem="SAr-hu-ncT" firstAttribute="top" secondItem="2nc-KP-b6P" secondAttribute="bottom" constant="20" id="XlZ-ka-t5R"/>
+                            <constraint firstItem="dVG-uT-jDE" firstAttribute="top" secondItem="Gb7-bc-jDu" secondAttribute="bottom" constant="20" id="aQK-Yj-pdS"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="AjB-rD-Wqs" secondAttribute="trailing" id="bfP-Ez-Hs1"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="eah-YJ-g24" secondAttribute="trailing" id="dzj-6C-Jyo"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="SAr-hu-ncT" secondAttribute="trailing" id="ig0-LF-x43"/>
+                            <constraint firstItem="K2B-q7-9Nf" firstAttribute="leading" secondItem="CF2-an-Bcb" secondAttribute="leading" constant="16" id="nTP-p7-Lfo"/>
+                        </constraints>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="667"/>
+                    <connections>
+                        <outlet property="episodeLabel" destination="K2B-q7-9Nf" id="eNi-LX-KMM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="w20-d6-MuB" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="18.399999999999999" y="45.42728635682159"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="icon_birthday" width="28" height="29"/>
+        <image name="user_image_big" width="375" height="190"/>
+    </resources>
+</document>
