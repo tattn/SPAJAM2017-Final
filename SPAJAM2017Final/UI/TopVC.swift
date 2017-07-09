@@ -33,6 +33,7 @@ final class TopVC: UIViewController, StoryboardInstantiatable {
         var tapGesture = UITapGestureRecognizer()
         label.addGestureRecognizer(tapGesture)
         tapGesture.rx.event.subscribe(onNext: { _ in
+            self.navigationController?.setNavigationBarHidden(true, animated: false)
             self.navigationController?.pushViewController(BraveInfectionVC.instantiate(with: .init(title: "🐱")), animated: true)
         })
         .disposed(by: disposeBag)

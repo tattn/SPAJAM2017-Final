@@ -79,11 +79,11 @@ final class BraveInfectionVC: UIViewController {
         func diffFromCenter() -> CGPoint {
             switch self {
             case .up:
-                return CGPoint(x: 0, y: -200)
+                return CGPoint(x: 0, y: -135)
             case .right:
                 return CGPoint(x: 135, y: 0)
             case .down:
-                return CGPoint(x: 0, y: 200)
+                return CGPoint(x: 0, y: 135)
             case .left:
                 return CGPoint(x: -135, y: 0)
             case .none:
@@ -93,11 +93,11 @@ final class BraveInfectionVC: UIViewController {
         func diffFromCenterForResults() -> CGPoint {
             switch self {
             case .up:
-                return CGPoint(x: 0, y: -400)
+                return CGPoint(x: 0, y: -335)
             case .right:
                 return CGPoint(x: 335, y: 0)
             case .down:
-                return CGPoint(x: 0, y: 400)
+                return CGPoint(x: 0, y: 335)
             case .left:
                 return CGPoint(x: -335, y: 0)
             case .none:

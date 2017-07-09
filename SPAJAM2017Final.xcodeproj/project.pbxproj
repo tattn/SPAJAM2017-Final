@@ -87,6 +87,7 @@
 		24FD0C4A1D5F34DF0031B6F0 /* ProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24FD0C491D5F34DF0031B6F0 /* ProgressHUD.swift */; };
 		9B16BD231F11447F0009EE46 /* BraveInfectionVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B16BD221F11447F0009EE46 /* BraveInfectionVC.storyboard */; };
 		9B16BD251F1144A60009EE46 /* BraveInfectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B16BD241F1144A60009EE46 /* BraveInfectionVC.swift */; };
+		9B16BD291F11B39E0009EE46 /* MyEpisodeVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B16BD281F11B39E0009EE46 /* MyEpisodeVC.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -206,6 +207,7 @@
 		24FD0C491D5F34DF0031B6F0 /* ProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressHUD.swift; sourceTree = "<group>"; };
 		9B16BD221F11447F0009EE46 /* BraveInfectionVC.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = BraveInfectionVC.storyboard; path = Common/BraveInfectionVC.storyboard; sourceTree = "<group>"; };
 		9B16BD241F1144A60009EE46 /* BraveInfectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BraveInfectionVC.swift; sourceTree = "<group>"; };
+		9B16BD281F11B39E0009EE46 /* MyEpisodeVC.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MyEpisodeVC.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -422,6 +424,7 @@
 				24671AEA1F113D9100EAF842 /* LoginVC.swift */,
 				044C78751F114C4A00884868 /* UserIconView.swift */,
 				044C78771F114C6300884868 /* UserIconView.xib */,
+				9B16BD281F11B39E0009EE46 /* MyEpisodeVC.storyboard */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -603,6 +606,7 @@
 				24410D721D2427AA008B0A97 /* Assets.xcassets in Resources */,
 				24410D701D2427AA008B0A97 /* Main.storyboard in Resources */,
 				9B16BD231F11447F0009EE46 /* BraveInfectionVC.storyboard in Resources */,
+				9B16BD291F11B39E0009EE46 /* MyEpisodeVC.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
