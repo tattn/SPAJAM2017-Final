@@ -16,6 +16,7 @@ struct GraphMe {
     let gender: String
     let locationName: String
     let works: [Work]
+    let educations: [Eduction]
     let id: String // 747789068725242
     let birthday: String // MM/HH/YYYY
     let hometownName: String
@@ -28,6 +29,10 @@ struct GraphMe {
         let id: String
         let locationName: String
         let positionName: String // エンジニア
+    }
+    
+    struct Eduction {
+        let name: String
     }
 }
 
@@ -53,7 +58,7 @@ struct Feed {
 final class GraphAPI {
     static func me(completion: @escaping (Result<GraphMe, NSError>) -> Void) {
         guard FBSDKAccessToken.current() != nil else { return }
-        let params: [String: String] = ["fields": "name,about,birthday,hometown,gender,location,work,picture.type(large)", "locale": "ja_JP"]
+        let params: [String: String] = ["fields": "name,about,birthday,hometown,gender,location,education,work,picture.type(large)", "locale": "ja_JP"]
         let request = FBSDKGraphRequest(graphPath: "me", parameters: params)
         _ = request?.start(completionHandler: { (_, result, error) in
             if let error = error {
@@ -70,6 +75,9 @@ final class GraphAPI {
                                                           id: $0["id"] as! String,
                                                           locationName: ($0["location"] as! [String: Any])["name"] as! String,
                                                           positionName: ($0["position"] as! [String: Any])["name"] as! String)
+                    },
+                                      educations: (result["education"] as? [[String: Any]] ?? []).map {
+                                        GraphMe.Eduction(name: ($0["classes"] as? [String: Any] ?? [:])["name"] as? String ?? "")
                     },
                                       id: result["id"] as! String,
                                       birthday: result["birthday"] as? String ?? "",
@@ -100,7 +108,7 @@ final class GraphAPI {
             let summary = result["summary"] as! NSDictionary
             let counts = summary["total_count"] as! Int
             
-            let params = "name,about,birthday,hometown,gender,location,work,picture.type(large)"
+            let params = "name,about,birthday,hometown,gender,location,education,work,picture.type(large)"
 //            let graphRequest: FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me/taggable_friends", parameters: ["fields": params, "limit": "\(counts)", "locale": "ja_JP"])
 //            graphRequest.start( completionHandler: { (_, result, error) -> Void in
 //                
@@ -124,7 +132,7 @@ final class GraphAPI {
             //let graphRequest = FBSDKGraphRequest(graphPath: "me/taggable_friends", parameters: params)
             // 同じアプリを承認している友達を取得 (https://developers.facebook.com/docs/graph-api/reference/user/friends )
             let graphRequest = FBSDKGraphRequest(graphPath: "me/friends", parameters: ["fields": params, "limit": "\(counts)", "locale": "ja_JP"])
-            graphRequest?.start { _, result, error in
+            _ = graphRequest?.start { _, result, error in
                 
                 if let error = error {
                     print("graph taggable_friends: \(error)")
@@ -142,12 +150,15 @@ final class GraphAPI {
                                                   locationName: ($0["location"] as! [String: Any])["name"] as! String,
                                                   positionName: ($0["position"] as! [String: Any])["name"] as! String)
                         },
+                            educations: (result["education"] as? [[String: Any]] ?? []).map {
+                                GraphMe.Eduction(name: ($0["classes"] as? [String: Any] ?? [:])["name"] as? String ?? "")
+                        },
                             id: result["id"] as! String,
                             birthday: result["birthday"] as! String,
                             hometownName: (result["hometown"] as! [String: Any])["name"] as! String,
                             name: result["name"] as! String,
                             iconUrl: ((result["picture"] as! [String: Any])["data"] as! [String: Any])["url"] as! String)
-                } + Mock.friends()
+                    } + Mock.friends()
                 
                 print(friends)
                 completion(.success(friends))
@@ -158,7 +169,7 @@ final class GraphAPI {
     static func profile(userId: String, completion: @escaping (Result<GraphMe, NSError>) -> Void) {
         guard FBSDKAccessToken.current() != nil else { return }
         
-        let params: [String: String] = ["fields": "name,about,birthday,hometown,gender,location,work,picture.type(large)", "locale": "ja_JP"]
+        let params: [String: String] = ["fields": "name,about,birthday,hometown,gender,location,education,work,picture.type(large)", "locale": "ja_JP"]
         let request = FBSDKGraphRequest(graphPath: "/\(userId)", parameters: params)
         _ = request?.start(completionHandler: { (_, result, error) -> Void in
             if let error = error {
@@ -176,6 +187,9 @@ final class GraphAPI {
                                                       id: $0["id"] as! String,
                                                       locationName: ($0["location"] as! [String: Any])["name"] as! String,
                                                       positionName: ($0["position"] as! [String: Any])["name"] as! String)
+                },
+                                  educations: (result["education"] as? [[String: Any]] ?? []).map {
+                                    GraphMe.Eduction(name: ($0["classes"] as? [String: Any] ?? [:])["name"] as? String ?? "")
                 },
                                   id: result["id"] as! String,
                                   birthday: result["birthday"] as! String,
