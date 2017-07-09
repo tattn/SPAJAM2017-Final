@@ -37,7 +37,7 @@ final class TopVC: UIViewController, StoryboardInstantiatable {
         var tapGesture = UITapGestureRecognizer()
         label.addGestureRecognizer(tapGesture)
         tapGesture.rx.event.subscribe(onNext: { _ in
-            self.fetchFacebookData {
+            TopVC.fetchFacebookData(view: self) {
                 self.navigationController?.setNavigationBarHidden(true, animated: false)
                 self.navigationController?.pushViewController(BraveInfectionVC.instantiate(with: .init(title: "")), animated: true)
             }
@@ -71,16 +71,16 @@ final class TopVC: UIViewController, StoryboardInstantiatable {
     }
 
     @IBAction func tapLoginButton(_ sender: Any) {
-        fetchFacebookData {}
+        TopVC.fetchFacebookData(view: self, completion: nil)
     }
     
-    private func fetchFacebookData(completion: (() -> Void)?) {
-        Login.login(from: self) {
+    class func fetchFacebookData(view: UIViewController, completion: (() -> Void)?) {
+        Login.login(from: view) {
             GraphAPI.me { meResult in
                 switch meResult {
                 case .success(let me):
                     TopVC.me = me
-                case .failure(let _):
+                case .failure(_):
                     break
                 }
                 
@@ -88,7 +88,7 @@ final class TopVC: UIViewController, StoryboardInstantiatable {
                     switch friendsResult {
                     case .success(let friends):
                         TopVC.friends = friends
-                    case .failure(let _):
+                    case .failure(_):
                         break
                     }
                     completion?()
