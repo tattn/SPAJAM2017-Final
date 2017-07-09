@@ -31,6 +31,12 @@ def mock_all gender, location, work, education, birthday, hometown, name
       "https://github.com/tattn/SPAJAM2017-Final/raw/master/assets/thumbnail6.png",
       "https://github.com/tattn/SPAJAM2017-Final/raw/master/assets/thumbnail7.png",
       "https://github.com/tattn/SPAJAM2017-Final/raw/master/assets/thumbnail8.png",
+      "https://github.com/tattn/SPAJAM2017-Final/raw/master/assets/thumbnail9.png",
+      "https://github.com/tattn/SPAJAM2017-Final/raw/master/assets/thumbnail10.png",
+      "https://github.com/tattn/SPAJAM2017-Final/raw/master/assets/thumbnail11.png",
+      "https://github.com/tattn/SPAJAM2017-Final/raw/master/assets/thumbnail12.png",
+      "https://github.com/tattn/SPAJAM2017-Final/raw/master/assets/thumbnail13.png",
+      "https://github.com/tattn/SPAJAM2017-Final/raw/master/assets/thumbnail14.png",
     ].sample
   }
 
