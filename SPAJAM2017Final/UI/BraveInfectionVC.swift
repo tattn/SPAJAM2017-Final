@@ -251,10 +251,9 @@ final class BraveInfectionVC: UIViewController {
     }
     
     private func setup(view: UIView, point: CGPoint, direction: Direction = .none) {
-        func setupResultButtons(center: CGPoint, direction: Direction = .none, number: Int = 4) {
+        func setupResultButtons(center: CGPoint, direction: Direction = .none, friends: [GraphMe], limit: Int) {
             func createButton(defaultPoint: CGPoint, buttonSize: CGSize, friend: GraphMe) {
                 let view = UserIconView(frame: CGRect(origin: defaultPoint, size: buttonSize))
-                let me = TopVC.me!
                 view.setup(userName: friend.name,
                            userDescription: friend.works[0].employerName,
                            imageURL: URL(string: friend.iconUrl)!)
@@ -265,10 +264,9 @@ final class BraveInfectionVC: UIViewController {
             var defaultPoint = CGPoint(x: center.x - buttonSize.width / 2 + direction.diffFromCenterForResults().x,
                                        y: center.y - buttonSize.height / 2 + direction.diffFromCenterForResults().y)
             
-            let friends = TopVC.friends!
             createButton(defaultPoint: defaultPoint, buttonSize: buttonSize, friend: friends[0])
 
-            for i in 1 ..< number {
+            for i in 1 ..< limit {
                 if i % 3 == 0 {
                     createButton(defaultPoint: defaultPoint,
                                  buttonSize: buttonSize,
@@ -287,7 +285,6 @@ final class BraveInfectionVC: UIViewController {
                                  buttonSize: buttonSize,
                                  friend: friends[i])
                 }
-                
             }
         }
         
@@ -295,13 +292,21 @@ final class BraveInfectionVC: UIViewController {
                                             y: point.y - view.frame.size.height / 2 + direction.diffFromCenter().y),
                             size: view.frame.size)
         
+        let friends = TopVC.friends!
+        // let me = TopVC.me!
+        
         switch direction {
         case .none:
             break
-        case .up, .down:
-            setupResultButtons(center: point, direction: direction, number: 10)
-        case .right, .left:
-            setupResultButtons(center: point, direction: direction, number: 4)
+        // ここでfilterをかける
+        case .up:
+            setupResultButtons(center: point, direction: direction, friends: friends, limit: 10)
+        case .down:
+            setupResultButtons(center: point, direction: direction, friends: friends, limit: 10)
+        case .right:
+            setupResultButtons(center: point, direction: direction, friends: friends, limit: 4)
+        case .left:
+            setupResultButtons(center: point, direction: direction, friends: friends, limit: 4)
         }
     }
 }
