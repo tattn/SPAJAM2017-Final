@@ -53,6 +53,8 @@ final class BraveInfectionVC: UIViewController {
     @IBOutlet weak var 同じ出身地View: RoundedView!
     @IBOutlet weak var 同じ所在地View: RoundedView!
     
+    @IBOutlet weak var floatingButton: UIButton!
+    
     private var isCenter = true
     
     static var instantiateSource: InstantiateSource {
@@ -61,6 +63,14 @@ final class BraveInfectionVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        var tapGesture = UITapGestureRecognizer()
+        floatingButton.addGestureRecognizer(tapGesture)
+        tapGesture.rx.event.subscribe(onNext: { _ in
+            self.navigationController?.setNavigationBarHidden(false, animated: false)
+            self.navigationController?.pushViewController(MyEpisodeVC.instantiate(with: .init(title: "あなたたた のエピソード")), animated: true)
+        })
+            .disposed(by: disposeBag)
         
         let screenSize = UIScreen.main.bounds.size
         let center = CGPoint(x: screenSize.width * 3 / 2, y: screenSize.height * 3 / 2)
