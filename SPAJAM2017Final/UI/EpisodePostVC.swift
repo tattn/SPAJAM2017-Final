@@ -23,7 +23,7 @@ final class EpisodePostVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        uiBarButtonItem = UIBarButtonItem(title: "編集", style: .plain, target: self, action: #selector(EpisodePostVC.onClickMyButton(sender:)))
+        uiBarButtonItem = UIBarButtonItem(title: "投稿", style: .plain, target: self, action: #selector(EpisodePostVC.onClickMyButton(sender:)))
         
         // ナビゲーションバーの右に設置する.
         self.navigationItem.rightBarButtonItem = uiBarButtonItem
@@ -32,7 +32,15 @@ final class EpisodePostVC: UIViewController {
     }
     
     internal func onClickMyButton(sender: UIButton) {
-        self.view.backgroundColor = UIColor.blue
+        textView.resignFirstResponder()
+        // きかない navigationController?.popToViewController(navigationController!.viewControllers[1], animated: true)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        //非表示にする。
+        if(textView.isFirstResponder){
+            textView.resignFirstResponder()
+        }
     }
 }
 
