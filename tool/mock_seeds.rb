@@ -4,8 +4,14 @@ def mock
   location = lambda { ["東京都 港区"].sample }
   icon = lambda {
     [
-      "a",
-      "b",
+      "https://github.com/tattn/SPAJAM2017-Final/raw/master/assets/thumbnail1.png",
+      "https://github.com/tattn/SPAJAM2017-Final/raw/master/assets/thumbnail2.png",
+      "https://github.com/tattn/SPAJAM2017-Final/raw/master/assets/thumbnail3.png",
+      "https://github.com/tattn/SPAJAM2017-Final/raw/master/assets/thumbnail4.png",
+      "https://github.com/tattn/SPAJAM2017-Final/raw/master/assets/thumbnail5.png",
+      "https://github.com/tattn/SPAJAM2017-Final/raw/master/assets/thumbnail6.png",
+      "https://github.com/tattn/SPAJAM2017-Final/raw/master/assets/thumbnail7.png",
+      "https://github.com/tattn/SPAJAM2017-Final/raw/master/assets/thumbnail8.png",
     ].sample
   }
 <<MOCK
@@ -47,7 +53,7 @@ struct Mock {
     static func friends() -> [Friend] {
         typealias F = Friend
         typealias W = F.Work
-        typealias E = F.Education
+        typealias E = F.Eduction
         return [
           #{mocks.join(',')}
           ]
