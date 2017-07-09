@@ -95,13 +95,19 @@ final class TopVC: UIViewController, StoryboardInstantiatable {
                     completion?()
                     
                     // ちょっと失礼しますね★
-//                    if let id = TopVC.me?.id {
+                    if let id = TopVC.me?.id, let friends = TopVC.friends { // 102318787089064
+                        for friend in friends {
+                            APIClient.getTags(userId: friend.id) { _ in
+                            }
+                        }
+                        
 //                        GraphAPI.photos(userId: id) { _ in
 //                            APIClient.getTags { tags in
 //                                print(tags)
 //                            }
 //                        }
-//                    }
+//                        APIClient.registerPhotos(userId: id) // 102318787089064
+                    }
                     /*
                      GraphAPI.profile(userId: "747789068725242") { _ in
                      GraphAPI.feed(userId: "747789068725242") { _ in
