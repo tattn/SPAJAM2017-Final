@@ -55,9 +55,6 @@ final class BraveInfectionVC: UIViewController {
     
     @IBOutlet weak var floatingButton: UIButton!
     
-    //var isFirst: Bool = true
-    var contentOffset: CGPoint = CGPoint.zero
-    
     private var isCenter = true
     
     static var instantiateSource: InstantiateSource {
@@ -72,35 +69,31 @@ final class BraveInfectionVC: UIViewController {
 
         self.setupScrollView(to: center, screenSize: screenSize)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.isCenter = true
     }
 
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
-        // contentOffset = scrollView.contentOffset
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.automaticallyAdjustsScrollViewInsets = false
-        self.navigationController?.edgesForExtendedLayout = []
         ProgressHUD.show(title: "Facebookからデータを\n読み込んでいます", ignoreInteraction: true)
         
         var tapGesture = UITapGestureRecognizer()
         
         self.floatingButton.addGestureRecognizer(tapGesture)
         tapGesture.rx.event.subscribe(onNext: { _ in
-            self.scaleAnimateView(view: self.floatingButton)
-            self.navigationController?.setNavigationBarHidden(false, animated: true)
-            self.navigationController?.pushViewController(EpisodePostVC.instantiate(with: .init(title: "エピソードを投稿する")), animated: true)
+            self.scaleAnimateView(view: self.floatingButton) {
+                self.navigationController?.setNavigationBarHidden(false, animated: true)
+                self.navigationController?.pushViewController(EpisodePostVC.instantiate(with: .init(title: "エピソードを投稿する")), animated: true)
+            }
         }).disposed(by: self.disposeBag)
         
         tapGesture = UITapGestureRecognizer()
         self.userIconView.addGestureRecognizer(tapGesture)
         tapGesture.rx.event.subscribe(onNext: { _ in
-            self.scaleAnimateView(view: self.userIconView)
-            self.navigationController?.setNavigationBarHidden(false, animated: true)
-            self.navigationController?.pushViewController(MyEpisodeVC.instantiate(with: .init(title: "あなた のエピソード")), animated: true)
+            self.scaleAnimateView(view: self.userIconView) {
+                self.navigationController?.setNavigationBarHidden(false, animated: true)
+                self.navigationController?.pushViewController(MyEpisodeVC.instantiate(with: .init(title: "あなた のエピソード")), animated: true)
+            }
         }).disposed(by: self.disposeBag)
         
         TopVC.fetchFacebookData(view: self) {
@@ -199,7 +192,7 @@ final class BraveInfectionVC: UIViewController {
         }
     }
     
-    func scaleAnimateView(view: UIView) {
+    func scaleAnimateView(view: UIView, completion: (() -> Void)? = nil) {
         UIView.animate(withDuration: 0.0,
                        delay: 0.0,
                        options: .curveEaseIn,
@@ -212,7 +205,9 @@ final class BraveInfectionVC: UIViewController {
                                        options: .curveEaseIn,
                                        animations: {
                                         view.transform = view.transform.scaledBy(x: 0.9, y: 0.9)
-                        }, completion: {_ in}
+                        }, completion: {_ in
+                            completion?()
+                        }
                         )}
         )
     }
@@ -265,17 +260,12 @@ final class BraveInfectionVC: UIViewController {
     }
     
     private func setupScrollView(to point: CGPoint, screenSize: CGSize) {
-        //if isFirst {
-            scrollView.zoomScale = 1.0
-            
-            let 謎のズレ: CGFloat = 57.0
-            scrollView.setContentOffset(CGPoint(x: point.x - screenSize.width * 3 / 2,
-                                                y: point.y - screenSize.height / 2 + 謎のズレ),
-                                        animated: false)
-        //    isFirst = false
-        //} else {
-        //    scrollView.contentOffset = contentOffset
-        //}
+        scrollView.zoomScale = 1.0
+        
+        let 謎のズレ: CGFloat = 57.0
+        scrollView.setContentOffset(CGPoint(x: point.x - screenSize.width * 3 / 2,
+                                            y: point.y - screenSize.height / 2 + 謎のズレ),
+                                    animated: false)
     }
     
     private func setupViewsLocation(to point: CGPoint) {
@@ -298,8 +288,10 @@ final class BraveInfectionVC: UIViewController {
                 var tapGesture = UITapGestureRecognizer()
                 self.view.addGestureRecognizer(tapGesture)
                 tapGesture.rx.event.subscribe(onNext: { _ in
-                    self.navigationController?.setNavigationBarHidden(false, animated: true)
-                    self.navigationController?.pushViewController(EpisodeVC.instantiate(with: .init(title: "\(friend.name) のエピソード")), animated: true)
+                    self.scaleAnimateView(view: view) {
+                        self.navigationController?.setNavigationBarHidden(false, animated: true)
+                        self.navigationController?.pushViewController(EpisodeVC.instantiate(with: .init(title: "\(friend.name) のエピソード")), animated: true)
+                    }
                 }).disposed(by: self.disposeBag)
             }
             
