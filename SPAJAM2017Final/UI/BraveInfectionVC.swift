@@ -64,9 +64,6 @@ final class BraveInfectionVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
 
-
-        ProgressHUD.show(title: "Facebookからデータを\n読み込んでいます", ignoreInteraction: true)
-
         let screenSize = UIScreen.main.bounds.size
         let center = CGPoint(x: screenSize.width * 3 / 2, y: screenSize.height * 3 / 2)
 
@@ -76,22 +73,25 @@ final class BraveInfectionVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        ProgressHUD.show(title: "Facebookからデータを\n読み込んでいます", ignoreInteraction: true)
+        
+        var tapGesture = UITapGestureRecognizer()
+        
+        self.floatingButton.addGestureRecognizer(tapGesture)
+        tapGesture.rx.event.subscribe(onNext: { _ in
+            self.navigationController?.setNavigationBarHidden(false, animated: false)
+            self.navigationController?.pushViewController(EpisodePostVC.instantiate(with: .init(title: "エピソードを投稿する")), animated: true)
+        }).disposed(by: self.disposeBag)
+        
+        tapGesture = UITapGestureRecognizer()
+        self.userIconView.addGestureRecognizer(tapGesture)
+        tapGesture.rx.event.subscribe(onNext: { _ in
+            self.navigationController?.setNavigationBarHidden(false, animated: false)
+            self.navigationController?.pushViewController(MyEpisodeVC.instantiate(with: .init(title: "あなた のエピソード")), animated: true)
+        }).disposed(by: self.disposeBag)
         
         TopVC.fetchFacebookData(view: self) {
-            var tapGesture = UITapGestureRecognizer()
-            self.floatingButton.addGestureRecognizer(tapGesture)
-            tapGesture.rx.event.subscribe(onNext: { _ in
-                self.navigationController?.setNavigationBarHidden(false, animated: false)
-                self.navigationController?.pushViewController(EpisodeVC.instantiate(with: .init(title: "エピソードを投稿する")), animated: true)
-            }).disposed(by: self.disposeBag)
-            
-            tapGesture = UITapGestureRecognizer()
-            self.userIconView.addGestureRecognizer(tapGesture)
-            tapGesture.rx.event.subscribe(onNext: { _ in
-                self.navigationController?.setNavigationBarHidden(false, animated: false)
-                self.navigationController?.pushViewController(MyEpisodeVC.instantiate(with: .init(title: "あなた のエピソード")), animated: true)
-            }).disposed(by: self.disposeBag)
-            
             self.userIconView.setup(userName: TopVC.me!.name, userDescription: "これはあなたです", imageURL: URL(string: TopVC.me!.iconUrl)!)
             
             let screenSize = UIScreen.main.bounds.size
@@ -257,6 +257,13 @@ final class BraveInfectionVC: UIViewController {
                            userDescription: friend.works.first?.employerName ?? "",
                            imageURL: URL(string: friend.iconUrl)!)
                 self.contentView.addSubview(view)
+                
+                var tapGesture = UITapGestureRecognizer()
+                self.view.addGestureRecognizer(tapGesture)
+                tapGesture.rx.event.subscribe(onNext: { _ in
+                    self.navigationController?.setNavigationBarHidden(false, animated: false)
+                    self.navigationController?.pushViewController(EpisodeVC.instantiate(with: .init(title: "\(friend.name) のエピソード")), animated: true)
+                }).disposed(by: self.disposeBag)
             }
             
             let buttonSize = CGSize(width: 115.0, height: 115.0)
