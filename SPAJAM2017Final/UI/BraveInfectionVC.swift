@@ -81,7 +81,7 @@ final class BraveInfectionVC: UIViewController {
         floatingButton.addGestureRecognizer(tapGesture)
         tapGesture.rx.event.subscribe(onNext: { _ in
             self.navigationController?.setNavigationBarHidden(false, animated: false)
-            self.navigationController?.pushViewController(EpisodeVC.instantiate(with: .init(title: "エピソードを投稿する")), animated: true)
+            self.navigationController?.pushViewController(EpisodePostVC.instantiate(with: .init(title: "エピソードを投稿する")), animated: true)
         })
             .disposed(by: disposeBag)
         
@@ -89,7 +89,7 @@ final class BraveInfectionVC: UIViewController {
         userIconView.addGestureRecognizer(tapGesture)
         tapGesture.rx.event.subscribe(onNext: { _ in
             self.navigationController?.setNavigationBarHidden(false, animated: false)
-            self.navigationController?.pushViewController(MyEpisodeVC.instantiate(with: .init(title: "あなたたた のエピソード")), animated: true)
+            self.navigationController?.pushViewController(MyEpisodeVC.instantiate(with: .init(title: "あなたのエピソード")), animated: true)
         })
             .disposed(by: disposeBag)
         
@@ -248,7 +248,17 @@ final class BraveInfectionVC: UIViewController {
                 let view = UserIconView(frame: CGRect(origin: defaultPoint, size: buttonSize))
                 let friend = TopVC.friends![counter]
                 counter += 1
-                view.setup(userName: friend.name, userDescription: friend.works[0].employerName, imageURL: URL(string: friend.iconUrl)!)
+                
+                view.setup(userName: friend.name, userDescription: friend.works.first?.employerName ?? "", imageURL: URL(string: friend.iconUrl)!)
+                
+                var tapGesture = UITapGestureRecognizer()
+                view.addGestureRecognizer(tapGesture)
+                tapGesture.rx.event.subscribe(onNext: { _ in
+                    self.navigationController?.setNavigationBarHidden(false, animated: false)
+                    self.navigationController?.pushViewController(EpisodeVC.instantiate(with: .init(title: "\(friend.name) のエピソード")), animated: true)
+                })
+                    .disposed(by: disposeBag)
+                
                 self.contentView.addSubview(view)
             }
             

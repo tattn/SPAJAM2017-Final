@@ -135,7 +135,7 @@ final class GraphAPI {
                 let friends = (result["data"] as! [[String: Any]]).map { result in
                     GraphMe(gender: result["gender"] as! String,
                             locationName: (result["location"] as? [String: Any] ?? [:])["name"] as? String ?? "",
-                            works: (result["work"] as! [[String: Any]]).map {
+                            works: (result["work"] as? [[String: Any]] ?? []).map {
                                 GraphMe.Work.init(employerName: ($0["employer"] as! [String: Any])["name"] as! String,
                                                   startDate: $0["start_date"] as! String,
                                                   id: $0["id"] as! String,
@@ -144,7 +144,7 @@ final class GraphAPI {
                         },
                             id: result["id"] as! String,
                             birthday: result["birthday"] as? String ?? "",
-                            hometownName: (result["hometown"] as! [String: Any])["name"] as! String,
+                            hometownName: (result["hometown"] as? [String: Any] ?? [:])["name"] as? String ?? "",
                             name: result["name"] as! String,
                             iconUrl: ((result["picture"] as! [String: Any])["data"] as! [String: Any])["url"] as! String)
                 } + Mock.friends()
