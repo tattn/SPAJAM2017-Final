@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Episode PostVC-->
+        <scene sceneID="Zeo-Vm-F2m">
+            <objects>
+                <viewController storyboardIdentifier="EpisodePostVC" id="Zll-hm-a6Y" customClass="EpisodePostVC" customModule="SPAJAM2017Final" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="oO7-XA-d2z"/>
+                        <viewControllerLayoutGuide type="bottom" id="AGr-21-bgT"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1Ql-au-Gck">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="あなたの勇気を出したエピソードを投稿しましょう" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="26f-xh-flH">
+                                <rect key="frame" x="16" y="40" width="343" height="17"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                <color key="textColor" red="0.37254901959999998" green="0.37254901959999998" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="エピソードは、他のユーザーに共有されます。" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wky-Ia-zEx">
+                                <rect key="frame" x="16" y="67" width="343" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.37254901959999998" green="0.37254901959999998" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Cp8-Ka-iU9">
+                                <rect key="frame" x="0.0" y="104" width="375" height="400"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="400" id="bjX-0Q-lNy"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="エピソードを入力…" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hT2-9i-JRf">
+                                <rect key="frame" x="16" y="120" width="343" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.53343713280000005" green="0.51611274480000002" blue="0.44381526110000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="26f-xh-flH" firstAttribute="trailing" secondItem="1Ql-au-Gck" secondAttribute="trailingMargin" id="0yl-17-ReQ"/>
+                            <constraint firstItem="hT2-9i-JRf" firstAttribute="leading" secondItem="1Ql-au-Gck" secondAttribute="leadingMargin" id="3o5-Ga-g9p"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Wky-Ia-zEx" secondAttribute="trailing" id="9CJ-kZ-gzD"/>
+                            <constraint firstItem="Cp8-Ka-iU9" firstAttribute="top" secondItem="Wky-Ia-zEx" secondAttribute="bottom" constant="20" id="Jgp-Wd-9n0"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="hT2-9i-JRf" secondAttribute="trailing" id="KE5-sk-PKb"/>
+                            <constraint firstItem="hT2-9i-JRf" firstAttribute="top" secondItem="Wky-Ia-zEx" secondAttribute="bottom" constant="36" id="Yt9-RM-v5Q"/>
+                            <constraint firstItem="hT2-9i-JRf" firstAttribute="leading" secondItem="1Ql-au-Gck" secondAttribute="leadingMargin" id="eNW-Sj-adr"/>
+                            <constraint firstAttribute="trailing" secondItem="Cp8-Ka-iU9" secondAttribute="trailing" id="fDQ-cA-iIk"/>
+                            <constraint firstItem="Wky-Ia-zEx" firstAttribute="top" secondItem="26f-xh-flH" secondAttribute="bottom" constant="10" id="iCu-67-pEE"/>
+                            <constraint firstItem="Cp8-Ka-iU9" firstAttribute="leading" secondItem="1Ql-au-Gck" secondAttribute="leading" id="ie2-PF-23Z"/>
+                            <constraint firstItem="26f-xh-flH" firstAttribute="leading" secondItem="1Ql-au-Gck" secondAttribute="leadingMargin" id="lO7-b8-boO"/>
+                            <constraint firstItem="26f-xh-flH" firstAttribute="top" secondItem="oO7-XA-d2z" secondAttribute="bottom" constant="20" id="qBU-hU-mD7"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="hT2-9i-JRf" secondAttribute="trailing" id="rBW-Gl-dED"/>
+                            <constraint firstItem="Wky-Ia-zEx" firstAttribute="leading" secondItem="1Ql-au-Gck" secondAttribute="leadingMargin" id="uK8-OS-0xK"/>
+                        </constraints>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="667"/>
+                    <connections>
+                        <outlet property="placeholderLabel" destination="hT2-9i-JRf" id="B4o-J6-FFc"/>
+                        <outlet property="textView" destination="Cp8-Ka-iU9" id="cKE-fM-uRW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3qL-8M-jAX" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="18.399999999999999" y="45.42728635682159"/>
+        </scene>
+    </scenes>
+</document>

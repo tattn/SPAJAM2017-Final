@@ -61,11 +61,25 @@ final class BraveInfectionVC: UIViewController {
         return .identifier(className)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         var tapGesture = UITapGestureRecognizer()
         floatingButton.addGestureRecognizer(tapGesture)
+        tapGesture.rx.event.subscribe(onNext: { _ in
+            self.navigationController?.setNavigationBarHidden(false, animated: false)
+            self.navigationController?.pushViewController(EpisodePostVC.instantiate(with: .init(title: "エピソードを投稿する")), animated: true)
+        })
+            .disposed(by: disposeBag)
+        
+        tapGesture = UITapGestureRecognizer()
+        userIconView.addGestureRecognizer(tapGesture)
         tapGesture.rx.event.subscribe(onNext: { _ in
             self.navigationController?.setNavigationBarHidden(false, animated: false)
             self.navigationController?.pushViewController(MyEpisodeVC.instantiate(with: .init(title: "あなたたた のエピソード")), animated: true)
