@@ -91,6 +91,8 @@
 		9B16BD2B1F11B9F90009EE46 /* MyEpisodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B16BD2A1F11B9F90009EE46 /* MyEpisodeVC.swift */; };
 		9BDABE6B1F11C20700F0E414 /* EpisodePostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDABE6A1F11C20700F0E414 /* EpisodePostVC.swift */; };
 		9BDABE6D1F11C21F00F0E414 /* EpisodePostVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BDABE6C1F11C21F00F0E414 /* EpisodePostVC.storyboard */; };
+		9BDABE6F1F11CF8700F0E414 /* EpisodeVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BDABE6E1F11CF8700F0E414 /* EpisodeVC.storyboard */; };
+		9BDABE711F11CFB000F0E414 /* EpisodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDABE701F11CFB000F0E414 /* EpisodeVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -214,6 +216,8 @@
 		9B16BD2A1F11B9F90009EE46 /* MyEpisodeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyEpisodeVC.swift; sourceTree = "<group>"; };
 		9BDABE6A1F11C20700F0E414 /* EpisodePostVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EpisodePostVC.swift; sourceTree = "<group>"; };
 		9BDABE6C1F11C21F00F0E414 /* EpisodePostVC.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EpisodePostVC.storyboard; sourceTree = "<group>"; };
+		9BDABE6E1F11CF8700F0E414 /* EpisodeVC.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EpisodeVC.storyboard; sourceTree = "<group>"; };
+		9BDABE701F11CFB000F0E414 /* EpisodeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EpisodeVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -434,6 +438,8 @@
 				9B16BD2A1F11B9F90009EE46 /* MyEpisodeVC.swift */,
 				9BDABE6A1F11C20700F0E414 /* EpisodePostVC.swift */,
 				9BDABE6C1F11C21F00F0E414 /* EpisodePostVC.storyboard */,
+				9BDABE6E1F11CF8700F0E414 /* EpisodeVC.storyboard */,
+				9BDABE701F11CFB000F0E414 /* EpisodeVC.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -615,6 +621,7 @@
 				24410D721D2427AA008B0A97 /* Assets.xcassets in Resources */,
 				24410D701D2427AA008B0A97 /* Main.storyboard in Resources */,
 				9B16BD231F11447F0009EE46 /* BraveInfectionVC.storyboard in Resources */,
+				9BDABE6F1F11CF8700F0E414 /* EpisodeVC.storyboard in Resources */,
 				9B16BD291F11B39E0009EE46 /* MyEpisodeVC.storyboard in Resources */,
 				9BDABE6D1F11C21F00F0E414 /* EpisodePostVC.storyboard in Resources */,
 			);
@@ -718,6 +725,7 @@
 				247A9CD21EDA051200D929FF /* Errors.swift in Sources */,
 				247A9D331EDB12F900D929FF /* HTTPRequest.swift in Sources */,
 				242CA74E1D5DA5B400BD0C4E /* NSLocalizedString+.swift in Sources */,
+				9BDABE711F11CFB000F0E414 /* EpisodeVC.swift in Sources */,
 				24671AEE1F11487900EAF842 /* GraphAPI.swift in Sources */,
 				2441B2C41EE080DC0065A0A6 /* Retry.swift in Sources */,
 				24410D861D242BEE008B0A97 /* UIColor+.swift in Sources */,

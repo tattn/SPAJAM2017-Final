@@ -13,6 +13,8 @@ import InstantiateStandard
 final class EpisodePostVC: UIViewController {
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var placeholderLabel: UILabel!
+ 
+    private var uiBarButtonItem: UIBarButtonItem!
     
     static var instantiateSource: InstantiateSource {
         return .identifier(className)
@@ -20,19 +22,29 @@ final class EpisodePostVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        uiBarButtonItem = UIBarButtonItem(title: "編集", style: .plain, target: self, action: #selector(EpisodePostVC.onClickMyButton(sender:)))
+        
+        // ナビゲーションバーの右に設置する.
+        self.navigationItem.rightBarButtonItem = uiBarButtonItem
+
         textView.delegate = self
+    }
+    
+    internal func onClickMyButton(sender: UIButton) {
+        self.view.backgroundColor = UIColor.blue
     }
 }
 
 extension EpisodePostVC: UITextViewDelegate {
-    //textviewがフォーカスされたら、Labelを非表示
+    // textviewがフォーカスされたら、Labelを非表示
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool
     {
         placeholderLabel.isHidden = true
         return true
     }
     
-    //textviewからフォーカスが外れて、TextViewが空だったらLabelを再び表示
+    // textviewからフォーカスが外れて、TextViewが空だったらLabelを再び表示
     func textViewDidEndEditing(_ textView: UITextView) {
         if(textView.text.isEmpty){
             placeholderLabel.isHidden = false

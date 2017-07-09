@@ -1,5 +1,5 @@
 //
-//  MyEpisodeVC.swift
+//  EpisodeVC.swift
 //  SPAJAM2017Final
 //
 //  Created by 熊本　和正 on 2017/07/09.
@@ -10,12 +10,13 @@ import UIKit
 import Instantiate
 import InstantiateStandard
 
-final class MyEpisodeVC: UIViewController {
+final class EpisodeVC: UIViewController {
     @IBOutlet weak var episodeLabel: UILabel!
     
     static var instantiateSource: InstantiateSource {
         return .identifier(className)
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,10 +27,11 @@ final class MyEpisodeVC: UIViewController {
         let attributedText = NSMutableAttributedString(string: episodeLabel.text!)
         attributedText.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, attributedText.length))
         episodeLabel.attributedText = attributedText
+
     }
 }
 
-extension MyEpisodeVC: StoryboardInstantiatable {
+extension EpisodeVC: StoryboardInstantiatable {
     struct Dependency {
         let title: String
         //        let id: String

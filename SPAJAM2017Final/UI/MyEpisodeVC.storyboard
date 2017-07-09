@@ -75,6 +75,9 @@
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
+                    <connections>
+                        <outlet property="episodeLabel" destination="pyE-OM-Rph" id="16q-Uf-UBV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yda-qc-nlc" sceneMemberID="firstResponder"/>
             </objects>

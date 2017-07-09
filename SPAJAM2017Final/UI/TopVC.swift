@@ -39,7 +39,7 @@ final class TopVC: UIViewController, StoryboardInstantiatable {
         tapGesture.rx.event.subscribe(onNext: { _ in
             self.fetchFacebookData {
                 self.navigationController?.setNavigationBarHidden(true, animated: false)
-                self.navigationController?.pushViewController(BraveInfectionVC.instantiate(with: .init(title: "🐱")), animated: true)
+                self.navigationController?.pushViewController(BraveInfectionVC.instantiate(with: .init(title: "")), animated: true)
             }
         })
         .disposed(by: disposeBag)

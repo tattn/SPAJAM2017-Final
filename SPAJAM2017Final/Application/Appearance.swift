@@ -12,18 +12,21 @@ import UIKit
 struct Appearance {
     static func setup() {
         // Icon color of NavigationBar
-        UINavigationBar.appearance().tintColor = .main
+        UINavigationBar.appearance().tintColor = .white
+        
+        // たしました @kakumamo
+        UINavigationBar.appearance().barTintColor = .main
         
         // Text color of NavigationBar
-        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.main]
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         
         // Text color (UIButton & UIAlertView & ...)
-        UIView.appearance().tintColor = .main
+        UIView.appearance().tintColor = .white
     }
 }
 
 extension UIColor {
-    static var main: UIColor { return .red }
+    static var main: UIColor { return UIColor.init(hex: 0x00C6F4) }
 }
 
 extension UIFont {

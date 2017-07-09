@@ -63,7 +63,14 @@ final class BraveInfectionVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
+
+        let screenSize = UIScreen.main.bounds.size
+
+        let center = CGPoint(x: screenSize.width * 3 / 2, y: screenSize.height * 3 / 2)
+        setupRoundedViews(center: center, screenSize: screenSize)
+        setupViewsLocation(to: center)
+
+        self.setupScrollView(to: center, screenSize: screenSize)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
@@ -74,7 +81,7 @@ final class BraveInfectionVC: UIViewController {
         floatingButton.addGestureRecognizer(tapGesture)
         tapGesture.rx.event.subscribe(onNext: { _ in
             self.navigationController?.setNavigationBarHidden(false, animated: false)
-            self.navigationController?.pushViewController(EpisodePostVC.instantiate(with: .init(title: "エピソードを投稿する")), animated: true)
+            self.navigationController?.pushViewController(EpisodeVC.instantiate(with: .init(title: "エピソードを投稿する")), animated: true)
         })
             .disposed(by: disposeBag)
         
@@ -85,13 +92,6 @@ final class BraveInfectionVC: UIViewController {
             self.navigationController?.pushViewController(MyEpisodeVC.instantiate(with: .init(title: "あなたたた のエピソード")), animated: true)
         })
             .disposed(by: disposeBag)
-        
-        let screenSize = UIScreen.main.bounds.size
-        let center = CGPoint(x: screenSize.width * 3 / 2, y: screenSize.height * 3 / 2)
-        setupRoundedViews(center: center, screenSize: screenSize)
-        setupScrollView(to: center, screenSize: screenSize)
-        setupViewsLocation(to: center)
-        
         
         userIconView.setup(userName: TopVC.me!.name, userDescription: "これはあなたです", imageURL: URL(string: TopVC.me!.iconUrl)!)
     }
