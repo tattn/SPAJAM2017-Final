@@ -12,7 +12,10 @@ import InstantiateStandard
 import RxSwift
 import RxCocoa
 
+
 final class TopVC: UIViewController, StoryboardInstantiatable {
+    static var me: GraphMe? = nil
+    static var friends: [GraphMe]? = []
     
     @IBOutlet private weak var label: UILabel!
     @IBOutlet private weak var label2: UILabel!
@@ -33,8 +36,10 @@ final class TopVC: UIViewController, StoryboardInstantiatable {
         var tapGesture = UITapGestureRecognizer()
         label.addGestureRecognizer(tapGesture)
         tapGesture.rx.event.subscribe(onNext: { _ in
-            self.navigationController?.setNavigationBarHidden(true, animated: false)
-            self.navigationController?.pushViewController(BraveInfectionVC.instantiate(with: .init(title: "🐱")), animated: true)
+            self.fetchFacebookData {
+                self.navigationController?.setNavigationBarHidden(true, animated: false)
+                self.navigationController?.pushViewController(BraveInfectionVC.instantiate(with: .init(title: "🐱")), animated: true)
+            }
         })
         .disposed(by: disposeBag)
         
@@ -51,18 +56,37 @@ final class TopVC: UIViewController, StoryboardInstantiatable {
     }
 
     @IBAction func tapLoginButton(_ sender: Any) {
+        fetchFacebookData {}
+    }
+    
+    private func fetchFacebookData(completion: (() -> Void)?) {
         Login.login(from: self) {
-//            GraphAPI.me { _ in
-//                GraphAPI.friends { _ in
-                    GraphAPI.profile(userId: "747789068725242") { _ in
-//                        GraphAPI.feed(userId: "747789068725242") { _ in
-//                            GraphAPI.photos(userId: "747789068725242") { _ in
-//                            }
-
-//                        }
+            GraphAPI.me { meResult in
+                switch meResult {
+                case .success(let me):
+                    TopVC.me = me
+                case .failure(let _):
+                    break
+                }
+                
+                GraphAPI.friends { friendsResult in
+                    switch friendsResult {
+                    case .success(let friends):
+                        TopVC.friends = friends
+                    case .failure(let _):
+                        break
                     }
-//                }
-//            }
+                    completion?()
+                    /*
+                     GraphAPI.profile(userId: "747789068725242") { _ in
+                     GraphAPI.feed(userId: "747789068725242") { _ in
+                     GraphAPI.photos(userId: "747789068725242") { _ in
+                     }
+                     
+                     }
+                     }*/
+                }
+            }
         }
     }
 }

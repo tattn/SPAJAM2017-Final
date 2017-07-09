@@ -65,14 +65,14 @@ final class GraphAPI {
                                       locationName: (result["location"] as! [String: Any])["name"] as! String,
                                       works: (result["work"] as! [[String: Any]]).map {
                                         GraphMe.Work.init(employerName: ($0["employer"] as! [String: Any])["name"] as! String,
-                                                          startDate: $0["start_date"] as! String,
+                                                          startDate: $0["start_date"] as? String ?? "",
                                                           id: $0["id"] as! String,
-                                                          locationName: ($0["location"] as! [String: Any])["name"] as! String,
-                                                          positionName: ($0["position"] as! [String: Any])["name"] as! String)
+                                                          locationName: ($0["location"] as? [String: Any] ?? [:])["name"] as? String ?? "",
+                                                          positionName: ($0["position"] as? [String: Any] ?? [:])["name"] as? String ?? "")
                     },
                                       id: result["id"] as! String,
                                       birthday: result["birthday"] as! String,
-                                      hometownName: (result["hometown"] as! [String: Any])["name"] as! String,
+                                      hometownName: (result["hometown"] as? [String: Any] ?? [:])["name"] as? String ?? "",
                                       name: result["name"] as! String,
                                       iconUrl: ((result["picture"] as! [String: Any])["data"] as! [String: Any])["url"] as! String)
                 print(graphMe)
@@ -133,7 +133,7 @@ final class GraphAPI {
                 guard let result = result as? [String: Any] else { return }
                 let friends = (result["data"] as! [[String: Any]]).map { result in
                     GraphMe(gender: result["gender"] as! String,
-                            locationName: (result["location"] as! [String: Any])["name"] as! String,
+                            locationName: (result["location"] as? [String: Any] ?? [:])["name"] as? String ?? "",
                             works: (result["work"] as! [[String: Any]]).map {
                                 GraphMe.Work.init(employerName: ($0["employer"] as! [String: Any])["name"] as! String,
                                                   startDate: $0["start_date"] as! String,
@@ -142,7 +142,7 @@ final class GraphAPI {
                                                   positionName: ($0["position"] as! [String: Any])["name"] as! String)
                         },
                             id: result["id"] as! String,
-                            birthday: result["birthday"] as! String,
+                            birthday: result["birthday"] as? String ?? "",
                             hometownName: (result["hometown"] as! [String: Any])["name"] as! String,
                             name: result["name"] as! String,
                             iconUrl: ((result["picture"] as! [String: Any])["data"] as! [String: Any])["url"] as! String)
