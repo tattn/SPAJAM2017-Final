@@ -69,6 +69,7 @@ final class BraveInfectionVC: UIViewController {
 
         self.setupScrollView(to: center, screenSize: screenSize)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.isCenter = true
     }
 
     
@@ -80,17 +81,19 @@ final class BraveInfectionVC: UIViewController {
         
         self.floatingButton.addGestureRecognizer(tapGesture)
         tapGesture.rx.event.subscribe(onNext: { _ in
-            self.scaleAnimateView(view: self.floatingButton)
-            self.navigationController?.setNavigationBarHidden(false, animated: true)
-            self.navigationController?.pushViewController(EpisodePostVC.instantiate(with: .init(title: "エピソードを投稿する")), animated: true)
+            self.scaleAnimateView(view: self.floatingButton) {
+                self.navigationController?.setNavigationBarHidden(false, animated: true)
+                self.navigationController?.pushViewController(EpisodePostVC.instantiate(with: .init(title: "エピソードを投稿する")), animated: true)
+            }
         }).disposed(by: self.disposeBag)
         
         tapGesture = UITapGestureRecognizer()
         self.userIconView.addGestureRecognizer(tapGesture)
         tapGesture.rx.event.subscribe(onNext: { _ in
-            self.scaleAnimateView(view: self.userIconView)
-            self.navigationController?.setNavigationBarHidden(false, animated: true)
-            self.navigationController?.pushViewController(MyEpisodeVC.instantiate(with: .init(title: "あなた のエピソード")), animated: true)
+            self.scaleAnimateView(view: self.userIconView) {
+                self.navigationController?.setNavigationBarHidden(false, animated: true)
+                self.navigationController?.pushViewController(MyEpisodeVC.instantiate(with: .init(title: "あなた のエピソード")), animated: true)
+            }
         }).disposed(by: self.disposeBag)
         
         TopVC.fetchFacebookData(view: self) {
@@ -189,7 +192,7 @@ final class BraveInfectionVC: UIViewController {
         }
     }
     
-    func scaleAnimateView(view: UIView) {
+    func scaleAnimateView(view: UIView, completion: (() -> Void)? = nil) {
         UIView.animate(withDuration: 0.0,
                        delay: 0.0,
                        options: .curveEaseIn,
@@ -202,7 +205,9 @@ final class BraveInfectionVC: UIViewController {
                                        options: .curveEaseIn,
                                        animations: {
                                         view.transform = view.transform.scaledBy(x: 0.9, y: 0.9)
-                        }, completion: {_ in}
+                        }, completion: {_ in
+                            completion?()
+                        }
                         )}
         )
     }
@@ -283,8 +288,10 @@ final class BraveInfectionVC: UIViewController {
                 var tapGesture = UITapGestureRecognizer()
                 self.view.addGestureRecognizer(tapGesture)
                 tapGesture.rx.event.subscribe(onNext: { _ in
-                    self.navigationController?.setNavigationBarHidden(false, animated: true)
-                    self.navigationController?.pushViewController(EpisodeVC.instantiate(with: .init(title: "\(friend.name) のエピソード")), animated: true)
+                    self.scaleAnimateView(view: view) {
+                        self.navigationController?.setNavigationBarHidden(false, animated: true)
+                        self.navigationController?.pushViewController(EpisodeVC.instantiate(with: .init(title: "\(friend.name) のエピソード")), animated: true)
+                    }
                 }).disposed(by: self.disposeBag)
             }
             
